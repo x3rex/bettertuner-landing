@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="g1" cx="80%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#B18BFF" stop-opacity="0.20"/>
+      <stop offset="60%" stop-color="#B18BFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="55%" stop-color="#B18BFF"/>
+      <stop offset="100%" stop-color="#FF2D9D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#050507"/>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect width="1200" height="630" fill="url(#g2)"/>
+  <g transform="translate(96,150)">
+    <g transform="scale(0.42)" fill="#00E5FF">
+      <path d="M243.78,158.1c-74.95,-11.25 -144.23,44.5 -147.91,120.13 -0.13,2.59 -2.5,4.47 -4,4.48 -1.99,0.01 -5.19,-1.4 -5.18,-4.6 0.28,-63.57 39.8,-120.4 99.72,-142.57 37.16,-13.75 77.2,-10.57 113.84,5.5 l-20.97,28.77 c-11.71,-5.91 -22.73,-9.78 -35.5,-11.7Z"/>
+      <path d="M350.59,280.81c-0.93,-25.49 -6.96,-48.46 -21.07,-69.41 l14.89,-36.59 c25.73,28.64 41.14,64.98 42.48,103.29 0.38,10.84 -7.1,18.94 -16.5,19.97 -9.6,1.05 -19.37,-5.58 -19.79,-17.26Z"/>
+      <path d="M331.49,122.86l-128.81,176.94 c-11.99,16.48 -11.36,39.05 5.76,52.09 10.33,7.86 23.17,9.67 35.64,5.51 9.42,-3.14 18.24,-11.13 22.63,-22.57 l30.82,-80.35 67.95,-176.44 -33.99,44.82ZM249.19,330.85c-4.43,11.35 -17.71,13.36 -27.06,9.05 -7.47,-3.45 -14.17,-17.53 -7.45,-26.73 l88.97,-121.94 -54.46,139.62Z"/>
+    </g>
+  </g>
+  <text x="96" y="350" font-family="'Space Grotesk', Arial, sans-serif" font-size="86" font-weight="700" fill="#E8E8EA">BetterTuner</text>
+  <text x="98" y="430" font-family="'Space Grotesk', Arial, sans-serif" font-size="40" font-weight="500" fill="url(#grad)">Tune. Keep time. Master your craft.</text>
+  <text x="98" y="492" font-family="Arial, sans-serif" font-size="28" fill="#9A9AA0">Precision tuner · Expressive metronome · Practice studio</text>
+  <text x="98" y="534" font-family="Arial, sans-serif" font-size="28" fill="#9A9AA0">28 instruments · 60+ tunings · Indian classical</text>
+</svg>

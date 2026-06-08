@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BetterTuner: the tuner, metronome & practice studio for every musician</title>
+  <meta name="description" content="A precision chromatic tuner, expressive metronome, and complete practice studio in one app. 28 instruments, 60+ tunings, Indian classical tanpura & talas, real-time visualizers, and on-device pitch detection." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://bettertuner.com/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bettertuner.com/" />
+  <meta property="og:title" content="BetterTuner: Tune. Keep time. Master your craft." />
+  <meta property="og:description" content="Precision tuner, expressive metronome and practice studio for every instrument, including Indian classical." />
+  <meta property="og:image" content="assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient animated background mesh -->
+  <div class="bg-mesh" aria-hidden="true">
+    <span class="blob blob--cyan"></span>
+    <span class="blob blob--magenta"></span>
+    <span class="blob blob--violet"></span>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="BetterTuner home">
+      <span class="nav__logo" data-logo></span>
+      <span class="nav__name">BetterTuner</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#tuner">Tuner</a>
+      <a href="#rhythm">Rhythm</a>
+      <a href="#chords">Chords</a>
+      <a href="#train">Train</a>
+      <a href="#classical">Indian Classical</a>
+    </nav>
+    <a href="#download" class="btn btn--ghost nav__cta">Get the app</a>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__copy reveal">
+        <span class="eyebrow"><span class="eyebrow__dot"></span> Tuner · Metronome · Practice Studio</span>
+        <h1 class="hero__title">
+          Tune. Keep time.<br />
+          <span class="grad-text">Master your craft.</span>
+        </h1>
+        <p class="hero__lede">
+          A studio-grade chromatic tuner, an expressive metronome, and a complete
+          practice toolkit for guitarists, violinists, vocalists, and the worlds
+          of Indian classical, flamenco &amp; beyond. All in one beautiful app.
+        </p>
+        <div class="hero__actions">
+          <a href="#download" class="btn btn--primary">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 20.5v-17c0-.6.7-1 1.2-.7l14 8.5c.5.3.5 1.1 0 1.4l-14 8.5c-.5.3-1.2 0-1.2-.7Z"/></svg>
+            Get BetterTuner
+          </a>
+          <a href="#features" class="btn btn--ghost">Explore features</a>
+        </div>
+        <ul class="hero__stats" aria-label="Highlights">
+          <li><strong data-count="28">28</strong><span>instruments</span></li>
+          <li><strong data-count="60" data-suffix="+">60+</strong><span>tunings</span></li>
+          <li><strong data-count="22">22</strong><span>talas</span></li>
+          <li><strong data-count="6">6</strong><span>tools in one</span></li>
+        </ul>
+      </div>
+
+      <!-- Animated phone mockup -->
+      <div class="hero__device reveal" data-tilt>
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen">
+            <div class="app-tuner">
+              <div class="app-tuner__head">
+                <span class="app-pill">Guitar · Standard</span>
+                <span class="app-pill app-pill--muted">A = 440</span>
+              </div>
+
+              <!-- Strobe / gauge -->
+              <div class="gauge">
+                <div class="gauge__rings">
+                  <span class="ring ring--1"></span>
+                  <span class="ring ring--2"></span>
+                  <span class="ring ring--3"></span>
+                </div>
+                <svg class="gauge__arc" viewBox="0 0 200 120" aria-hidden="true">
+                  <path class="gauge__track" d="M16 110 A 84 84 0 0 1 184 110" />
+                  <path class="gauge__fill" d="M16 110 A 84 84 0 0 1 184 110" />
+                  <line class="gauge__needle" x1="100" y1="110" x2="100" y2="34" />
+                  <circle class="gauge__hub" cx="100" cy="110" r="6" />
+                </svg>
+                <div class="gauge__readout">
+                  <span class="gauge__note">E<sub>2</sub></span>
+                  <span class="gauge__cents" data-cents>in tune</span>
+                </div>
+              </div>
+
+              <!-- String ladder -->
+              <div class="ladder">
+                <span class="ladder__row"><i>E</i><b style="--w:32%"></b></span>
+                <span class="ladder__row"><i>A</i><b style="--w:58%"></b></span>
+                <span class="ladder__row ladder__row--lit"><i>D</i><b style="--w:50%"></b></span>
+                <span class="ladder__row"><i>G</i><b style="--w:71%"></b></span>
+                <span class="ladder__row"><i>B</i><b style="--w:44%"></b></span>
+                <span class="ladder__row"><i>e</i><b style="--w:63%"></b></span>
+              </div>
+            </div>
+            <!-- Bottom nav -->
+            <div class="app-nav">
+              <!-- Tune (tuning fork) — active -->
+              <span class="app-nav__item app-nav__item--active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5,3.5 L8.5,12 Q8.5,15.5 12,15.5 Q15.5,15.5 15.5,12 L15.5,3.5 M12,15.5 L12,19"/>
+                  <circle cx="12" cy="21" r="1.4" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <!-- Analyze (waveform) -->
+              <span class="app-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3,13 L6,13 L8,8 L11,16 L13,5 L15,18 L17,11 L21,11"/>
+                </svg>
+              </span>
+              <!-- Tempo (metronome) -->
+              <span class="app-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8,21 L16,21 L14,4 L10,4 Z"/>
+                  <path d="M12,18 L13.5,7"/>
+                  <circle cx="13.5" cy="7" r="1.4" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <!-- Chords (chord chart) -->
+              <span class="app-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M6,4 L6,20 M10,4 L10,20 M14,4 L14,20 M18,4 L18,20"/>
+                  <path d="M5,8 L19,8 M5,13 L19,13 M5,18 L19,18"/>
+                  <circle cx="10" cy="10.5" r="1.6" fill="currentColor" stroke="none"/>
+                  <circle cx="14" cy="15.5" r="1.6" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <!-- Train (headphones) -->
+              <span class="app-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4,15 A8,8 0 0,1 20,15"/>
+                  <path d="M4,15 L4,18 A2,2 0 0,0 6,20 L7,20 A1,1 0 0,0 8,19 L8,16 A1,1 0 0,0 7,15 L4,15 Z"/>
+                  <path d="M20,15 L20,18 A2,2 0 0,1 18,20 L17,20 A1,1 0 0,1 16,19 L16,16 A1,1 0 0,1 17,15 L20,15 Z"/>
+                </svg>
+              </span>
+              <!-- Settings (sliders) -->
+              <span class="app-nav__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                  <path d="M4,6.5 L20,6.5 M4,12.5 L20,12.5 M4,18.5 L20,18.5"/>
+                  <circle cx="15" cy="6.5" r="2" fill="currentColor" stroke="none"/>
+                  <circle cx="8" cy="12.5" r="2" fill="currentColor" stroke="none"/>
+                  <circle cx="17" cy="18.5" r="2" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="device-glow" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <section class="trust reveal">
+      <div class="trust__item"><span>Studio-grade</span> YIN pitch engine</div>
+      <span class="trust__sep"></span>
+      <div class="trust__item"><span>On-device</span> pitch detection, zero lag</div>
+      <span class="trust__sep"></span>
+      <div class="trust__item"><span>Six tools</span> in one practice studio</div>
+    </section>
+
+    <!-- ============ FEATURES GRID ============ -->
+    <section class="section" id="features">
+      <div class="section__head reveal">
+        <span class="eyebrow"><span class="eyebrow__dot"></span> Everything in one place</span>
+        <h2 class="section__title">One app for the whole practice room</h2>
+        <p class="section__sub">Six tools that usually mean six apps, designed to feel like one.</p>
+      </div>
+
+      <div class="features">
+        <!-- Precision tuner -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <div class="pv-tuner">
+              <div class="pv-tuner__bar"></div>
+              <span class="pv-tuner__dot"></span>
+              <span class="pv-tuner__cap">E&nbsp;·&nbsp;in&nbsp;tune</span>
+            </div>
+          </div>
+          <h3>Precision tuner</h3>
+          <p>A robust YIN detection engine resolves pitch to the cent, with smoothing tuned for real strings, reeds and voices, not lab tones.</p>
+        </article>
+
+        <!-- Two tuner views — string ladder -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <div class="pv-ladder">
+              <span class="pvl"><i>e</i><b><u style="left:60%"></u></b></span>
+              <span class="pvl pvl--in"><i>B</i><b><u></u></b></span>
+              <span class="pvl"><i>G</i><b><u style="left:42%"></u></b></span>
+              <span class="pvl"><i>D</i><b><u style="left:56%"></u></b></span>
+            </div>
+          </div>
+          <h3>Two tuner views</h3>
+          <p>A clean per-string ladder, or a photo-real headstock you tune peg by peg. Auto-advance walks you across the strings hands-free.</p>
+        </article>
+
+        <!-- Live visualizers — oscilloscope -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <svg class="pv-scope" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+              <line class="pv-scope-zero" x1="0" y1="30" x2="200" y2="30"/>
+              <g class="pv-scope-g"><path d="M0 30 q15 -18 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none"/></g>
+            </svg>
+          </div>
+          <h3>Live visualizers</h3>
+          <p>Switch between a needle meter, a stage-true strobe, an oscilloscope and an FFT spectrum + chroma waterfall. See your sound, not just hear it.</p>
+        </article>
+
+        <!-- Expressive metronome — beat dots -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <div class="pv-metro">
+              <span class="bd bd--accent"></span>
+              <span class="bd"></span>
+              <span class="bd"></span>
+              <span class="bd"></span>
+            </div>
+          </div>
+          <h3>Expressive metronome</h3>
+          <p>Sample-accurate timing, tap tempo, instant ½/×2, custom accents, a step sequencer and a deep library of click voices and real drums.</p>
+        </article>
+
+        <!-- Chords — fretboard shape -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <svg class="pv-chord" viewBox="0 0 66 74" aria-hidden="true">
+              <g stroke="var(--wire)" stroke-width="1.4" stroke-linecap="round">
+                <line x1="6"  y1="12" x2="6"  y2="66"/>
+                <line x1="17" y1="12" x2="17" y2="66"/>
+                <line x1="28" y1="12" x2="28" y2="66"/>
+                <line x1="39" y1="12" x2="39" y2="66"/>
+                <line x1="50" y1="12" x2="50" y2="66"/>
+                <line x1="61" y1="12" x2="61" y2="66"/>
+                <line x1="6" y1="30" x2="61" y2="30"/>
+                <line x1="6" y1="48" x2="61" y2="48"/>
+                <line x1="6" y1="66" x2="61" y2="66"/>
+              </g>
+              <line x1="6" y1="12" x2="61" y2="12" stroke="var(--text-tertiary)" stroke-width="3" stroke-linecap="round"/>
+              <g class="pv-chord__dots" fill="var(--cyan)">
+                <circle cx="28" cy="21" r="4.4" style="animation-delay:0s"/>
+                <circle cx="39" cy="39" r="4.4" style="animation-delay:.15s"/>
+                <circle cx="50" cy="39" r="4.4" style="animation-delay:.3s"/>
+              </g>
+            </svg>
+          </div>
+          <h3>Chords, decoded</h3>
+          <p>Browse fretboard and piano voicings with smart fingering and capo transposition for guitar, ukulele and keys.</p>
+        </article>
+
+        <!-- Train your ear — lesson stars (amber) -->
+        <article class="feature-card reveal">
+          <div class="feature-card__preview">
+            <div class="pv-ears">
+              <span style="animation-delay:0s">★</span>
+              <span style="animation-delay:.22s">★</span>
+              <span style="animation-delay:.44s">★</span>
+            </div>
+          </div>
+          <h3>Train your ear</h3>
+          <p>Guided sargam lessons, raga patterns and a ten-round ear-training game that grades your pitch with live feedback and stars.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ TUNER & VISUALIZER SHOWCASE ============ -->
+    <section class="section views" id="tuner">
+      <div class="section__head reveal">
+        <span class="eyebrow" style="--accent:var(--cyan)"><span class="eyebrow__dot"></span> The tuner &amp; visualizers</span>
+        <h2 class="section__title">See your pitch six different ways</h2>
+        <p class="section__sub">A photo-real headstock, a string ladder, and four real-time analyzers. Every view BetterTuner offers, lit up exactly as it looks in the app.</p>
+      </div>
+
+      <div class="views__grid">
+        <!-- 1 · Headstock -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage viz-stage--photo">
+            <div class="htune">
+              <div class="htune__track"><span class="htune__zone"></span><i class="htune__dot"></i></div>
+              <div class="htune__labels lblwrap">
+                <span class="lbl lbl--off">E&nbsp;·&nbsp;tuning…</span>
+                <span class="lbl lbl--in">E&nbsp;·&nbsp;in tune</span>
+              </div>
+            </div>
+            <div class="viz-headstock">
+              <img src="assets/guitar.webp" alt="Photo-real guitar headstock tuner" loading="lazy" width="1696" height="2520" />
+              <span class="hpeg" style="left:14%"></span>
+              <span class="hpeg" style="left:28.4%"></span>
+              <span class="hpeg hpeg--intune" style="left:42.8%"></span>
+              <span class="hpeg" style="left:57.2%"></span>
+              <span class="hpeg hpeg--amber" style="left:71.6%"></span>
+              <span class="hpeg" style="left:86%"></span>
+            </div>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">Headstock</span>
+            <span class="viz-tile__desc">Tune peg by peg on a photo-real headstock</span>
+          </figcaption>
+        </figure>
+
+        <!-- 2 · Ladder -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage">
+            <div class="viz-ladder">
+              <div class="srow srow--intune">
+                <span class="srow__label">E4</span>
+                <span class="srow__bar"><i></i></span>
+              </div>
+              <div class="srow">
+                <span class="srow__label">B3</span>
+                <span class="srow__bar"><i style="left:36%"></i></span>
+              </div>
+              <div class="srow">
+                <span class="srow__label">G3</span>
+                <span class="srow__bar"><i style="left:63%"></i></span>
+              </div>
+              <div class="srow">
+                <span class="srow__label">D3</span>
+                <span class="srow__bar"><i style="left:44%"></i></span>
+              </div>
+              <div class="srow">
+                <span class="srow__label">A2</span>
+                <span class="srow__bar"><i style="left:58%"></i></span>
+              </div>
+              <div class="srow">
+                <span class="srow__label">E2</span>
+                <span class="srow__bar"><i style="left:48%"></i></span>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">String ladder</span>
+            <span class="viz-tile__desc">Every string at a glance, auto-advancing</span>
+          </figcaption>
+        </figure>
+
+        <!-- 3 · Meter -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage">
+            <svg class="viz-meter" viewBox="0 0 200 200" aria-hidden="true">
+              <circle cx="100" cy="100" r="92" fill="none" stroke="var(--wire)"/>
+              <circle cx="100" cy="100" r="42" fill="none" stroke="var(--wire)"/>
+              <g stroke="var(--wire-active, #6A6A72)" stroke-width="1.4" stroke-linecap="round">
+                <line x1="100" y1="8" x2="100" y2="14"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(30 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(60 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(90 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(120 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(150 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(180 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(210 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(240 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(270 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(300 100 100)"/>
+                <line x1="100" y1="8" x2="100" y2="14" transform="rotate(330 100 100)"/>
+              </g>
+              <!-- Sargam (swara) labels — outer ring -->
+              <g font-family="var(--font-mono)" font-size="7" fill="var(--text-tertiary)" text-anchor="middle">
+                <text x="100" y="25" fill="var(--text-secondary)">Sa</text>
+                <text x="139" y="35">re</text>
+                <text x="167.5" y="64">Re</text>
+                <text x="178" y="103">ga</text>
+                <text x="167.5" y="141">Ga</text>
+                <text x="139" y="170">Ma</text>
+                <text x="100" y="180">Ma#</text>
+                <text x="61" y="170">Pa</text>
+                <text x="32.5" y="141">dha</text>
+                <text x="22" y="103">Dha</text>
+                <text x="32.5" y="64">ni</text>
+                <text x="61" y="35">Ni</text>
+              </g>
+              <!-- Western note labels — inner ring -->
+              <g font-family="var(--font-mono)" font-size="9" fill="var(--text-secondary)" text-anchor="middle">
+                <text x="100" y="47" fill="var(--text-primary)" font-weight="700">A</text>
+                <text x="128" y="54">A#</text>
+                <text x="148.5" y="75">B</text>
+                <text x="156" y="103">C</text>
+                <text x="148.5" y="131">C#</text>
+                <text x="128" y="151">D</text>
+                <text x="100" y="159">D#</text>
+                <text x="72" y="151">E</text>
+                <text x="51.5" y="131">F</text>
+                <text x="44" y="103">F#</text>
+                <text x="51.5" y="75">G</text>
+                <text x="72" y="54">G#</text>
+              </g>
+              <g class="meter-color">
+                <g class="needle">
+                  <line x1="100" y1="100" x2="100" y2="34" stroke="currentColor" stroke-width="10" stroke-linecap="round" opacity="0.14"/>
+                  <line x1="100" y1="100" x2="100" y2="34" stroke="currentColor" stroke-width="5"  stroke-linecap="round" opacity="0.30"/>
+                  <line x1="100" y1="100" x2="100" y2="34" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+                </g>
+                <circle cx="100" cy="100" r="5.5" fill="currentColor"/>
+                <circle cx="100" cy="100" r="2.2" fill="#000"/>
+              </g>
+            </svg>
+            <span class="viz-meter__cents lblwrap">
+              <span class="lbl lbl--off">A4 · ▲ +3.0 ¢</span>
+              <span class="lbl lbl--in">A4 · ● in tune</span>
+            </span>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">Meter</span>
+            <span class="viz-tile__desc">Chromatic needle dial, Western + sargam</span>
+          </figcaption>
+        </figure>
+
+        <!-- 4 · Strobe -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage">
+            <div class="viz-strobe">
+              <span class="sr sr1"></span>
+              <span class="sr sr2"></span>
+              <span class="sr sr3"></span>
+              <span class="sr sr4"></span>
+              <div class="viz-strobe__core">
+                <span class="viz-strobe__note">A</span>
+                <span class="lblwrap">
+                  <span class="lbl lbl--off">tuning…</span>
+                  <span class="lbl lbl--in">in tune</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">Strobe</span>
+            <span class="viz-tile__desc">Rings freeze the instant you lock in</span>
+          </figcaption>
+        </figure>
+
+        <!-- 5 · Oscilloscope -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage">
+            <svg class="viz-scope" viewBox="0 0 300 160" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="0" y1="80" x2="300" y2="80" stroke="var(--wire)" stroke-opacity="0.4"/>
+              <g class="scope-trace">
+                <path d="M0 80 q20 -55 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="var(--cyan)" stroke-opacity="0.25" stroke-width="6" stroke-linecap="round"/>
+                <path d="M0 80 q20 -55 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="var(--cyan)" stroke-width="2.4" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <span class="viz-scope__hz">440.0 Hz</span>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">Oscilloscope</span>
+            <span class="viz-tile__desc">Raw waveform with harmonic overlay</span>
+          </figcaption>
+        </figure>
+
+        <!-- 6 · Spectrum / chroma waterfall -->
+        <figure class="viz-tile reveal">
+          <div class="viz-stage">
+            <svg class="viz-spectrum" viewBox="0 0 300 232" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <path id="cwv" fill="none" d="M0 0 q16 -6 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0"/>
+              </defs>
+              <g class="chroma">
+                <use href="#cwv" x="30" y="14"  stroke="#B18BFF" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="32"  stroke="#FF2D9D" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="50"  stroke="#FFB300" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="68"  stroke="#A6FF00" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="86"  stroke="#00E5FF" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="104" stroke="#B18BFF" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="122" stroke="#FF2D9D" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="140" stroke="#FFB300" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="158" stroke="#A6FF00" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="176" stroke="#B18BFF" stroke-width="1.4"/>
+                <use href="#cwv" x="30" y="194" stroke="#FF2D9D" stroke-width="1.4"/>
+              </g>
+              <rect x="0" y="202" width="300" height="26" fill="rgba(0,229,255,0.09)"/>
+              <use href="#cwv" x="30" y="215" stroke="currentColor" stroke-width="2.4" class="chroma-active"/>
+              <!-- Left gutter masks the flowing wave starts, then static pitch labels on top -->
+              <rect x="0" y="0" width="26" height="232" fill="#080810"/>
+              <g font-family="var(--font-mono)" font-size="9" fill="var(--text-tertiary)" text-anchor="start">
+                <text x="6" y="17">B</text>
+                <text x="4" y="35">A#</text>
+                <text x="6" y="53">A</text>
+                <text x="4" y="71">G#</text>
+                <text x="6" y="89">G</text>
+                <text x="4" y="107">F#</text>
+                <text x="6" y="125">F</text>
+                <text x="6" y="143">E</text>
+                <text x="4" y="161">D#</text>
+                <text x="6" y="179">D</text>
+                <text x="4" y="197">C#</text>
+                <text x="6" y="219" fill="var(--cyan)" font-weight="700">C</text>
+              </g>
+            </svg>
+            <span class="viz-spectrum__badge lblwrap">
+              <span class="lbl lbl--off">C · ▲ tuning…</span>
+              <span class="lbl lbl--in">✓ IN TUNE · C</span>
+            </span>
+          </div>
+          <figcaption>
+            <span class="viz-tile__name">Spectrum</span>
+            <span class="viz-tile__desc">FFT + chroma waterfall by pitch class</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <ul class="views__spec reveal">
+        <li><strong>28</strong> instruments</li>
+        <li><strong>60+</strong> tunings + chromatic</li>
+        <li><strong>415–466 Hz</strong> reference</li>
+        <li><strong>Reference tones</strong> &amp; sampled plucks</li>
+      </ul>
+    </section>
+
+    <!-- ============ METRONOME & STEP SEQUENCER ============ -->
+    <section class="section metronome" id="rhythm">
+      <div class="section__head reveal">
+        <span class="eyebrow" style="--accent:var(--amber)"><span class="eyebrow__dot"></span> The Metronome &amp; Step Sequencer</span>
+        <h2 class="section__title">Speak every rhythm</h2>
+        <p class="section__sub">A straight 4/4, a 16-beat teental, a flamenco bulería, your own step-sequenced groove, and a tempo-locked delay &amp; reverb calculator. Here's everything it does, one at a time.</p>
+      </div>
+
+      <div class="mslider reveal" data-mslider>
+        <button class="mslider__arrow mslider__arrow--prev" data-prev aria-label="Previous">‹</button>
+        <div class="mslider__viewport">
+          <div class="mslider__track" data-track>
+
+            <!-- SLIDE 1 · Western -->
+            <div class="mslide">
+              <div class="ms-card">
+                <div class="ms-top">
+                  <div class="ms-bpm"><span class="ms-bpm__num">120</span><span class="ms-bpm__u">BPM</span></div>
+                  <span class="ms-name">Moderato</span>
+                  <span class="ms-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="ms-beats ms-beats--anim">
+                  <span class="bdot bdot--sam"></span><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span>
+                </div>
+                <div class="ms-chips">
+                  <span class="m-chip">2</span><span class="m-chip">3</span><span class="m-chip is-on">4</span><span class="m-chip">5</span><span class="m-chip">6</span><span class="m-chip">7</span>
+                  <span class="m-chips__suffix">/4</span>
+                </div>
+                <div class="ms-sounds">
+                  <div class="ms-sound"><small>Accent</small><b>Beep ▾</b></div>
+                  <div class="ms-sound"><small>Beat</small><b>Beep ▾</b></div>
+                  <div class="ms-sound ms-sound--toggle"><small>Accent beat 1</small><b class="m-switch"></b></div>
+                </div>
+              </div>
+              <p class="mslide__cap"><b>Western</b>: time signatures 2–7, custom accents, 12 click voices &amp; tap tempo</p>
+            </div>
+
+            <!-- SLIDE 2 · Indian talas -->
+            <div class="mslide">
+              <div class="ms-card">
+                <div class="ms-chips ms-chips--wrap">
+                  <span class="m-chip">Dadra</span><span class="m-chip">Kaharba</span><span class="m-chip is-on">Teental</span><span class="m-chip">Jhaptaal</span><span class="m-chip">Rupak</span><span class="m-chip">Ektaal</span>
+                </div>
+                <div class="ms-tala">
+                  <div class="vibhag">
+                    <div class="bcell"><span class="bdot bdot--sam"></span><i>×</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>2</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>3</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>4</i></div>
+                  </div>
+                  <div class="vibhag">
+                    <div class="bcell"><span class="bdot bdot--tali"></span><i>2</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>6</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>7</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>8</i></div>
+                  </div>
+                  <div class="vibhag">
+                    <div class="bcell"><span class="bdot bdot--khali"></span><i>0</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>10</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>11</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>12</i></div>
+                  </div>
+                  <div class="vibhag">
+                    <div class="bcell"><span class="bdot bdot--tali"></span><i>3</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>14</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>15</i></div>
+                    <div class="bcell"><span class="bdot"></span><i>16</i></div>
+                  </div>
+                </div>
+                <div class="ms-legend">
+                  <span><i class="dotc dotc--sam"></i> Sam</span>
+                  <span><i class="dotc dotc--tali"></i> Tali</span>
+                  <span><i class="dotc dotc--khali"></i> Khali</span>
+                </div>
+                <div class="ms-toggle"><span class="is-on">Tabla</span><span>Click</span></div>
+              </div>
+              <p class="mslide__cap"><b>Indian</b>: 22 Hindustani talas with sam · tali · khali roles and authentic tabla theka</p>
+            </div>
+
+            <!-- SLIDE 3 · Flamenco -->
+            <div class="mslide">
+              <div class="ms-card">
+                <div class="ms-chips ms-chips--wrap">
+                  <span class="m-chip">Soleá</span><span class="m-chip is-on">Bulería</span><span class="m-chip">Alegrías</span><span class="m-chip">Tangos</span><span class="m-chip">Rumba</span><span class="m-chip">Tanguillo</span>
+                </div>
+                <div class="ms-compas">
+                  <div class="bcell"><span class="bdot"></span><i>1</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>2</i></div>
+                  <div class="bcell"><span class="bdot bdot--tali"></span><i>3</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>4</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>5</i></div>
+                  <div class="bcell"><span class="bdot bdot--tali"></span><i>6</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>7</i></div>
+                  <div class="bcell"><span class="bdot bdot--tali"></span><i>8</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>9</i></div>
+                  <div class="bcell"><span class="bdot bdot--tali"></span><i>10</i></div>
+                  <div class="bcell"><span class="bdot"></span><i>11</i></div>
+                  <div class="bcell"><span class="bdot bdot--sam"></span><i>12</i></div>
+                </div>
+                <div class="ms-toggle"><span class="is-on">Palmas</span><span>Click</span></div>
+              </div>
+              <p class="mslide__cap"><b>Flamenco</b>: 12-count compás with accented palmas hand-claps</p>
+            </div>
+
+            <!-- SLIDE 4 · Step sequencer -->
+            <div class="mslide">
+              <div class="ms-card">
+                <div class="ms-seqbar">
+                  <span class="ms-btn">Presets ▾</span>
+                  <span class="ms-seqbar__mid">Bar <i>−</i> 4 <i>+</i> · Swing <b class="on">Soft</b></span>
+                  <span class="ms-btn">Save</span>
+                </div>
+                <div class="seqgrid">
+                  <div class="lane" style="--c:var(--cyan)">
+                    <span class="lane__name">● Kick ▾</span>
+                    <div class="lane__steps">
+                      <span class="beatcol" style="--bd:0s"><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:.5s"><i class="cell"></i></span>
+                      <span class="beatcol" style="--bd:1s"><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:1.5s"><i class="cell"></i></span>
+                    </div>
+                  </div>
+                  <div class="lane" style="--c:var(--amber)">
+                    <span class="lane__name">● Snare ▾</span>
+                    <div class="lane__steps">
+                      <span class="beatcol" style="--bd:0s"><i class="cell"></i></span>
+                      <span class="beatcol" style="--bd:.5s"><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:1s"><i class="cell"></i></span>
+                      <span class="beatcol" style="--bd:1.5s"><i class="cell on"></i></span>
+                    </div>
+                  </div>
+                  <div class="lane" style="--c:var(--violet)">
+                    <span class="lane__name">● Hi-hat ▾</span>
+                    <div class="lane__steps">
+                      <span class="beatcol" style="--bd:0s"><i class="cell on"></i><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:.5s"><i class="cell on"></i><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:1s"><i class="cell on"></i><i class="cell on"></i></span>
+                      <span class="beatcol" style="--bd:1.5s"><i class="cell on"></i><i class="cell on"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="ms-subrow">
+                  <span class="m-chip">1/4</span><span class="m-chip is-on">1/8</span><span class="m-chip">1/8T</span><span class="m-chip">1/16</span>
+                  <span class="ms-add">+ Add lane</span>
+                </div>
+              </div>
+              <p class="mslide__cap"><b>Step sequencer</b>: up to 5 drum lanes, per-lane subdivisions, swing &amp; saved presets</p>
+            </div>
+
+            <!-- SLIDE 5 · Delay & reverb calculator -->
+            <div class="mslide">
+              <div class="ms-card">
+                <div class="fx-top">
+                  <span class="fx-bpm"><b>120</b> BPM · 4/4 · 500 ms/quarter</span>
+                  <span class="fx-unit"><i class="is-on">ms</i><i>s</i><i>Hz</i></span>
+                </div>
+                <div class="fx-tables">
+                  <div class="fx-table">
+                    <div class="fx-th"><span>Reverb</span><span>Pre</span><span>Decay</span></div>
+                    <div class="fx-tr"><span>Stadium</span><span>250</span><b>7750</b></div>
+                    <div class="fx-tr"><span>Cathedral</span><span>125</span><b>5875</b></div>
+                    <div class="fx-tr"><span>Hall</span><span>63</span><b>3938</b></div>
+                    <div class="fx-tr"><span>Large Room</span><span>31</span><b>1969</b></div>
+                    <div class="fx-tr"><span>Small Room</span><span>16</span><b>984</b></div>
+                    <div class="fx-tr"><span>Tight Echo</span><span>4</span><b>496</b></div>
+                  </div>
+                  <div class="fx-table">
+                    <div class="fx-th"><span>Delay</span><span>Straight</span><span>Dotted</span><span>Triplet</span></div>
+                    <div class="fx-tr fx-tr--4"><span class="fx-note">1/2</span><span>1000</span><span>1500</span><span>667</span></div>
+                    <div class="fx-tr fx-tr--4"><span class="fx-note">1/4</span><span>500</span><span>750</span><span>333</span></div>
+                    <div class="fx-tr fx-tr--4"><span class="fx-note">1/8</span><span>250</span><span>375</span><span>167</span></div>
+                    <div class="fx-tr fx-tr--4"><span class="fx-note">1/16</span><span>125</span><span>188</span><span>83</span></div>
+                  </div>
+                </div>
+              </div>
+              <p class="mslide__cap"><b>Delay &amp; reverb calculator</b>: note-locked delay &amp; reverb times in ms · s · Hz</p>
+            </div>
+
+          </div>
+        </div>
+        <button class="mslider__arrow mslider__arrow--next" data-next aria-label="Next">›</button>
+
+        <div class="mslider__dots" data-dots>
+          <button class="mdot is-active" data-go="0">Western</button>
+          <button class="mdot" data-go="1">Indian</button>
+          <button class="mdot" data-go="2">Flamenco</button>
+          <button class="mdot" data-go="3">Sequencer</button>
+          <button class="mdot" data-go="4">Delay &amp; reverb</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE CHORDS HELPER ============ -->
+    <section class="section chords" id="chords" data-chords>
+      <div class="section__head reveal">
+        <span class="eyebrow"><span class="eyebrow__dot"></span> The Chords Helper</span>
+        <h2 class="section__title">Find any chord, any instrument</h2>
+        <p class="section__sub">Pick a root and a quality and see the voicing on guitar, ukulele and piano, with finger numbers, muted/open markers, and full capo support.</p>
+      </div>
+
+      <!-- Root + quality pickers -->
+      <div class="chords-bar reveal">
+        <div class="chords-bar__row">
+          <span class="m-chip is-on" data-root="0">C</span><span class="m-chip" data-root="1">C♯</span><span class="m-chip" data-root="2">D</span><span class="m-chip" data-root="3">D♯</span><span class="m-chip" data-root="4">E</span><span class="m-chip" data-root="5">F</span><span class="m-chip" data-root="6">F♯</span><span class="m-chip" data-root="7">G</span><span class="m-chip" data-root="8">G♯</span><span class="m-chip" data-root="9">A</span><span class="m-chip" data-root="10">A♯</span><span class="m-chip" data-root="11">B</span>
+        </div>
+        <div class="chords-bar__row">
+          <span class="m-chip is-on" data-qual="Major">Major</span><span class="m-chip" data-qual="Minor">Minor</span><span class="m-chip" data-qual="Dominant7">7</span><span class="m-chip" data-qual="Minor7">m7</span><span class="m-chip" data-qual="Major7">maj7</span><span class="m-chip" data-qual="Diminished">dim</span><span class="m-chip" data-qual="Augmented">aug</span><span class="m-chip" data-qual="Sus2">sus2</span><span class="m-chip" data-qual="Sus4">sus4</span><span class="m-chip" data-qual="Add9">add9</span>
+        </div>
+      </div>
+
+      <div class="chords-grid">
+        <!-- Guitar -->
+        <figure class="chord-card reveal">
+          <div class="chord-stage" data-fb="guitar">
+            <svg class="fretboard" viewBox="0 0 132 162" aria-label="Guitar C major">
+              <g class="mk"><text x="16" y="22">✕</text><text x="76" y="22">○</text><text x="116" y="22">○</text></g>
+              <g class="strings">
+                <line x1="16" y1="30" x2="16" y2="140"/><line x1="36" y1="30" x2="36" y2="140"/><line x1="56" y1="30" x2="56" y2="140"/><line x1="76" y1="30" x2="76" y2="140"/><line x1="96" y1="30" x2="96" y2="140"/><line x1="116" y1="30" x2="116" y2="140"/>
+              </g>
+              <line class="nut" x1="16" y1="30" x2="116" y2="30"/>
+              <g class="frets"><line x1="16" y1="52" x2="116" y2="52"/><line x1="16" y1="74" x2="116" y2="74"/><line x1="16" y1="96" x2="116" y2="96"/><line x1="16" y1="118" x2="116" y2="118"/><line x1="16" y1="140" x2="116" y2="140"/></g>
+              <g class="dots">
+                <circle cx="36" cy="85" r="7.5"/><text class="fg" x="36" y="88.5">3</text>
+                <circle cx="56" cy="63" r="7.5"/><text class="fg" x="56" y="66.5">2</text>
+                <circle cx="96" cy="41" r="7.5"/><text class="fg" x="96" y="44.5">1</text>
+              </g>
+              <g class="names"><text x="16" y="156">E</text><text x="36" y="156">A</text><text x="56" y="156">D</text><text x="76" y="156">G</text><text x="96" y="156">B</text><text x="116" y="156">e</text></g>
+            </svg>
+          </div>
+          <figcaption><b>Guitar</b><span data-cap="guitar">C major · open position</span></figcaption>
+        </figure>
+
+        <!-- Ukulele -->
+        <figure class="chord-card reveal">
+          <div class="chord-stage" data-fb="ukulele">
+            <svg class="fretboard" viewBox="0 0 96 162" aria-label="Ukulele C major">
+              <g class="mk"><text x="16" y="22">○</text><text x="37" y="22">○</text><text x="58" y="22">○</text></g>
+              <g class="strings">
+                <line x1="16" y1="30" x2="16" y2="140"/><line x1="37" y1="30" x2="37" y2="140"/><line x1="58" y1="30" x2="58" y2="140"/><line x1="79" y1="30" x2="79" y2="140"/>
+              </g>
+              <line class="nut" x1="16" y1="30" x2="79" y2="30"/>
+              <g class="frets"><line x1="16" y1="52" x2="79" y2="52"/><line x1="16" y1="74" x2="79" y2="74"/><line x1="16" y1="96" x2="79" y2="96"/><line x1="16" y1="118" x2="79" y2="118"/><line x1="16" y1="140" x2="79" y2="140"/></g>
+              <g class="dots"><circle cx="79" cy="85" r="7.5"/><text class="fg" x="79" y="88.5">3</text></g>
+              <g class="names"><text x="16" y="156">G</text><text x="37" y="156">C</text><text x="58" y="156">E</text><text x="79" y="156">A</text></g>
+            </svg>
+          </div>
+          <figcaption><b>Ukulele</b><span data-cap="ukulele">C major · re-entrant GCEA</span></figcaption>
+        </figure>
+
+        <!-- Piano -->
+        <figure class="chord-card reveal">
+          <div class="chord-stage" data-fb="piano">
+            <svg class="piano" viewBox="0 0 224 144" preserveAspectRatio="xMidYMid meet" aria-label="Piano C major">
+              <g class="wk">
+                <rect class="hl" x="0" y="8" width="32" height="128"/>
+                <rect x="32" y="8" width="32" height="128"/>
+                <rect class="hl" x="64" y="8" width="32" height="128"/>
+                <rect x="96" y="8" width="32" height="128"/>
+                <rect class="hl" x="128" y="8" width="32" height="128"/>
+                <rect x="160" y="8" width="32" height="128"/>
+                <rect x="192" y="8" width="32" height="128"/>
+              </g>
+              <g class="bk">
+                <rect x="23" y="8" width="18" height="80"/>
+                <rect x="55" y="8" width="18" height="80"/>
+                <rect x="119" y="8" width="18" height="80"/>
+                <rect x="151" y="8" width="18" height="80"/>
+                <rect x="183" y="8" width="18" height="80"/>
+              </g>
+              <g class="pl"><text x="16" y="126">C</text><text x="80" y="126">E</text><text x="144" y="126">G</text></g>
+            </svg>
+          </div>
+          <figcaption><b>Piano</b><span data-cap="piano">C major · root, third, fifth</span></figcaption>
+        </figure>
+      </div>
+
+      <!-- Capo option -->
+      <div class="chords-capo reveal">
+        <div class="chords-capo__fig">
+          <svg class="fretboard" viewBox="0 0 132 162" aria-label="Guitar C shape with capo at fret 2">
+            <g class="strings">
+              <line x1="16" y1="30" x2="16" y2="140"/><line x1="36" y1="30" x2="36" y2="140"/><line x1="56" y1="30" x2="56" y2="140"/><line x1="76" y1="30" x2="76" y2="140"/><line x1="96" y1="30" x2="96" y2="140"/><line x1="116" y1="30" x2="116" y2="140"/>
+            </g>
+            <line class="nut nut--capo" x1="16" y1="30" x2="116" y2="30"/>
+            <g class="frets"><line x1="16" y1="52" x2="116" y2="52"/><line x1="16" y1="74" x2="116" y2="74"/><line x1="16" y1="96" x2="116" y2="96"/><line x1="16" y1="118" x2="116" y2="118"/><line x1="16" y1="140" x2="116" y2="140"/></g>
+            <g class="dots">
+              <circle cx="36" cy="85" r="7.5"/><text class="fg" x="36" y="88.5">3</text>
+              <circle cx="56" cy="63" r="7.5"/><text class="fg" x="56" y="66.5">2</text>
+              <circle cx="96" cy="41" r="7.5"/><text class="fg" x="96" y="44.5">1</text>
+            </g>
+            <g class="names"><text x="16" y="156">E</text><text x="36" y="156">A</text><text x="56" y="156">D</text><text x="76" y="156">G</text><text x="96" y="156">B</text><text x="116" y="156">e</text></g>
+          </svg>
+        </div>
+        <div class="chords-capo__copy">
+          <h3>Capo, handled for you</h3>
+          <p>Clamp a capo on any fret and BetterTuner re-voices the shape automatically. Play a familiar C shape at capo 2 and it sounds a D. The chart shows the shape, the capo bar, and the chord it really makes.</p>
+          <span class="capo-stepper"><b>−</b> Capo <i>2</i> <b>+</b></span>
+          <span class="capo-note">C shape · capo 2 → D</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE VOCAL AND EAR TRAINER ============ -->
+    <section class="section trainer" id="train" data-trainer>
+      <div class="section__head reveal">
+        <span class="eyebrow" style="--accent:var(--violet)"><span class="eyebrow__dot"></span> The Vocal &amp; Ear Trainer</span>
+        <h2 class="section__title">Train your voice and your ear</h2>
+        <p class="section__sub">Sing guided sargam with live pitch feedback, then test your ear with a ten-round listening game, graded with stars and streaks.</p>
+      </div>
+
+      <div class="trainer-grid">
+        <!-- Vocal trainer -->
+        <figure class="trainer-card reveal">
+          <div class="vt">
+            <div class="vt-top">
+              <div><b>Aaroh · Ascending</b><span data-vt-step>Step 1 of 8</span></div>
+              <span class="vt-x">✕</span>
+            </div>
+            <div class="vt-prog"><i data-vt-prog style="width:12%"></i></div>
+            <div class="vt-hero">
+              <span class="vt-phase">Sing with the tone</span>
+              <span class="vt-swara" data-vt-swara>Sa</span>
+              <span class="vt-hz" data-vt-hz>261.6 Hz</span>
+              <span class="vt-cents is-in" data-vt-cents>In tune</span>
+              <div class="vt-trace">
+                <svg class="vt-wave" viewBox="0 0 300 80" preserveAspectRatio="none">
+                  <rect class="band" x="0" y="32" width="300" height="16"/>
+                  <line class="zero" x1="0" y1="40" x2="300" y2="40"/>
+                  <g class="vt-pitch"><g class="vt-trace-g"><path d="M0 40 q20 -16 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none"/></g></g>
+                </svg>
+              </div>
+              <div class="vt-hold"><i data-vt-hold></i></div>
+            </div>
+          </div>
+          <figcaption><b>Vocal trainer</b><span>Guided sargam, live pitch &amp; hold-to-pass</span></figcaption>
+        </figure>
+
+        <!-- Ear trainer -->
+        <figure class="trainer-card reveal">
+          <div class="et">
+            <div class="et-top">
+              <span class="et-round">ROUND <i data-et-round>1</i> / 10</span>
+              <span class="et-chip">SCORE <b data-et-score>0</b></span>
+              <span class="et-chip">STREAK <b data-et-streak>0</b></span>
+            </div>
+            <div class="et-pills"><span class="is-on">Piano</span><span>Guitar</span><span>Synth</span><span>Tanpura</span></div>
+            <div class="et-banner et-banner--cyan" data-et-banner>♪&nbsp; LISTEN…</div>
+            <div class="et-choices">
+              <span class="et-choice" data-c="0">Re</span>
+              <span class="et-choice" data-c="1">Ga</span>
+              <span class="et-choice" data-c="2">Pa</span>
+              <span class="et-choice" data-c="3">Dha</span>
+            </div>
+            <div class="et-foot"><span class="et-replay">♪&nbsp; REPLAY</span></div>
+          </div>
+          <figcaption><b>Ear trainer</b><span>10 rounds · 4 choices · Sargam or Western</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ INDIAN CLASSICAL ============ -->
+    <section class="classical" id="classical">
+      <div class="classical__inner">
+        <div class="section__head reveal">
+          <span class="eyebrow" style="--accent:var(--violet)"><span class="eyebrow__dot"></span> A rare specialty</span>
+          <h2 class="section__title">Built for Indian classical, too</h2>
+          <p class="section__sub">Most tuners stop at the guitar. BetterTuner speaks sargam.</p>
+        </div>
+        <div class="classical__grid">
+          <article class="glass-card reveal">
+            <div class="ic-stage">
+              <svg class="tanpura" viewBox="0 0 200 124" aria-hidden="true">
+                <g class="tp-res">
+                  <circle cx="100" cy="95" r="16"/><circle cx="100" cy="95" r="16"/><circle cx="100" cy="95" r="16"/>
+                </g>
+                <g class="tp-strings">
+                  <line class="s s0" x1="73" y1="14" x2="73" y2="92"/>
+                  <line class="s s1" x1="91" y1="14" x2="91" y2="92"/>
+                  <line class="s s2" x1="109" y1="14" x2="109" y2="92"/>
+                  <line class="s s3" x1="127" y1="14" x2="127" y2="92"/>
+                </g>
+                <line class="tp-bridge" x1="60" y1="94" x2="140" y2="94"/>
+                <g class="tp-lab"><text x="73" y="110">Pa</text><text x="91" y="110">Sa</text><text x="109" y="110">Sa</text><text x="127" y="110">Sa</text></g>
+              </svg>
+            </div>
+            <h3>Tanpura drone</h3>
+            <p>A four-voice, harmonically-synthesized tanpura with a natural staggered pluck, locked to your chosen Sa. Set it and practice for hours.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="ic-stage">
+              <div class="sargam" aria-hidden="true">
+                <span><b>सा</b><i>Sa</i></span><span><b>रे</b><i>Re</i></span><span><b>ग</b><i>Ga</i></span><span><b>म</b><i>Ma</i></span><span><b>प</b><i>Pa</i></span><span><b>ध</b><i>Dha</i></span><span><b>नि</b><i>Ni</i></span><span><b>सां</b><i>Sa'</i></span>
+              </div>
+            </div>
+            <h3>Sargam &amp; swara labels</h3>
+            <p>Every note is named in its swara with the correct saptak marker across all twelve keys of Sa, for tuning, lessons and ear training.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="ic-stage">
+              <svg class="tala" viewBox="0 0 160 160" aria-hidden="true">
+                <circle class="guide" cx="80" cy="80" r="60"/>
+                <g class="dots">
+                  <circle class="m m-sam" cx="80" cy="20" r="5"/>
+                  <circle class="m m-plain" cx="103" cy="24.6" r="4"/>
+                  <circle class="m m-plain" cx="122.4" cy="37.6" r="4"/>
+                  <circle class="m m-plain" cx="135.4" cy="57" r="4"/>
+                  <circle class="m m-tali" cx="140" cy="80" r="4"/>
+                  <circle class="m m-plain" cx="135.4" cy="103" r="4"/>
+                  <circle class="m m-plain" cx="122.4" cy="122.4" r="4"/>
+                  <circle class="m m-plain" cx="103" cy="135.4" r="4"/>
+                  <circle class="m m-khali" cx="80" cy="140" r="4"/>
+                  <circle class="m m-plain" cx="57" cy="135.4" r="4"/>
+                  <circle class="m m-plain" cx="37.6" cy="122.4" r="4"/>
+                  <circle class="m m-plain" cx="24.6" cy="103" r="4"/>
+                  <circle class="m m-tali" cx="20" cy="80" r="4"/>
+                  <circle class="m m-plain" cx="24.6" cy="57" r="4"/>
+                  <circle class="m m-plain" cx="37.6" cy="37.6" r="4"/>
+                  <circle class="m m-plain" cx="57" cy="24.6" r="4"/>
+                </g>
+                <g class="tala-hand">
+                  <line x1="80" y1="80" x2="80" y2="24"/>
+                  <circle cx="80" cy="24" r="4"/>
+                </g>
+                <circle class="hub" cx="80" cy="80" r="24"/>
+                <text class="tala-c1" x="80" y="78">Teental</text>
+                <text class="tala-c2" x="80" y="92">16 mātrā</text>
+              </svg>
+            </div>
+            <h3>Talas with theka</h3>
+            <p>Teental, Jhaptaal, Rupak and 19 more, each with sam, tali and khali roles and a real tabla phrase per matra.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSTRUMENT MARQUEE ============ -->
+    <section class="marquee-section reveal">
+      <p class="marquee-label">Tunings for the instruments you actually play</p>
+      <div class="marquee">
+        <div class="marquee__track">
+          <span>Guitar</span><span>Bass</span><span>Ukulele</span><span>Violin</span><span>Viola</span><span>Cello</span><span>Mandolin</span><span>Banjo</span><span>Sitar</span><span>Sarod</span><span>Tanpura</span><span>Veena</span><span>Erhu</span><span>Pipa</span><span>Guqin</span><span>Oud</span><span>Saz</span><span>Bouzouki</span><span>Dotara</span><span>Voice</span>
+          <span aria-hidden="true">Guitar</span><span aria-hidden="true">Bass</span><span aria-hidden="true">Ukulele</span><span aria-hidden="true">Violin</span><span aria-hidden="true">Viola</span><span aria-hidden="true">Cello</span><span aria-hidden="true">Mandolin</span><span aria-hidden="true">Banjo</span><span aria-hidden="true">Sitar</span><span aria-hidden="true">Sarod</span><span aria-hidden="true">Tanpura</span><span aria-hidden="true">Veena</span><span aria-hidden="true">Erhu</span><span aria-hidden="true">Pipa</span><span aria-hidden="true">Guqin</span><span aria-hidden="true">Oud</span><span aria-hidden="true">Saz</span><span aria-hidden="true">Bouzouki</span><span aria-hidden="true">Dotara</span><span aria-hidden="true">Voice</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DOWNLOAD CTA ============ -->
+    <section class="cta" id="download">
+      <div class="cta__inner reveal">
+        <span class="nav__logo nav__logo--lg" data-logo></span>
+        <h2>Bring BetterTuner to your practice</h2>
+        <p>Coming soon to the App Store and Google Play. Tune precisely, keep perfect time, and grow as a musician on every instrument.</p>
+        <div class="store-badges">
+          <a class="store-badge" href="#" aria-label="Download on the App Store (coming soon)">
+            <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2 1.6-3 1.7-3a3.7 3.7 0 0 0-2.9-1.6c-1.2-.1-2.4.7-3 .7s-1.6-.7-2.6-.7A3.9 3.9 0 0 0 4.3 10c-1.4 2.5-.4 6.2 1 8.2.7 1 1.5 2.1 2.5 2.1s1.3-.6 2.5-.6 1.5.6 2.6.6 1.7-1 2.4-2a8.6 8.6 0 0 0 1.1-2.2 3.6 3.6 0 0 1-2-3.5ZM14.5 6.2A3.5 3.5 0 0 0 15.3 3a3.6 3.6 0 0 0-2.3 1.2 3.3 3.3 0 0 0-.8 3 3 3 0 0 0 2.3-1Z"/></svg>
+            <span><small>Coming soon to the</small><strong>App Store</strong></span>
+          </a>
+          <a class="store-badge" href="#" aria-label="Get it on Google Play (coming soon)">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M3.6 2.3 13.4 12 3.6 21.7a1.3 1.3 0 0 1-.6-1.1V3.4a1.3 1.3 0 0 1 .6-1.1Zm11.2 8.3 2.6 1.5-2.6 1.4-2.1-1.4ZM5 2.6l9.1 5.3-1.9 1.9Zm0 18.8 7.2-7.2 1.9 1.9Z"/></svg>
+            <span><small>Coming soon to</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <span class="nav__logo" data-logo></span>
+      <span>BetterTuner</span>
+    </div>
+    <p class="footer__tag">The tuner, metronome &amp; practice studio for every musician.</p>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#features">Features</a>
+      <a href="#tuner">Tuner</a>
+      <a href="#rhythm">Rhythm</a>
+      <a href="#chords">Chords</a>
+      <a href="#train">Train</a>
+      <a href="#classical">Indian Classical</a>
+    </nav>
+    <p class="footer__copy">© <span data-year>2026</span> BetterTuner. Crafted for musicians.</p>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
