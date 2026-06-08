@@ -107,15 +107,21 @@
   document.querySelectorAll("[data-mslider]").forEach((slider) => {
     const track = slider.querySelector("[data-track]");
     if (!track) return;
-    const count = track.children.length;
+    const viewport = slider.querySelector(".mslider__viewport");
+    const slides = track.children;
+    const count = slides.length;
     const dots = Array.from(slider.querySelectorAll("[data-go]"));
     let idx = 0;
     let timer = null;
+
+    // Size the viewport to the active slide so shorter slides don't leave a gap.
+    const fit = () => { if (viewport && slides[idx]) viewport.style.height = slides[idx].offsetHeight + "px"; };
 
     const go = (k) => {
       idx = (k + count) % count;
       track.style.transform = `translateX(${-idx * 100}%)`;
       dots.forEach((d, di) => d.classList.toggle("is-active", di === idx));
+      fit();
     };
     const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
     const start = () => {
@@ -130,6 +136,9 @@
     dots.forEach((d, di) => d.addEventListener("click", () => nudge(di)));
     slider.addEventListener("mouseenter", stop);
     slider.addEventListener("mouseleave", start);
+    window.addEventListener("resize", fit);
+    window.addEventListener("load", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
     go(0);
     start();

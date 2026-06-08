@@ -505,8 +505,8 @@ main { display: block; }
 
 /* ---------- Metronome slider ---------- */
 .mslider { position: relative; max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; }
-.mslider__viewport { overflow: hidden; border-radius: 22px; }
-.mslider__track { display: flex; transition: transform .55s var(--ease); }
+.mslider__viewport { overflow: hidden; border-radius: 22px; transition: height .45s var(--ease); }
+.mslider__track { display: flex; align-items: flex-start; transition: transform .55s var(--ease); }
 .mslide { min-width: 100%; padding: 4px; display: flex; flex-direction: column; }
 .mslide__cap { text-align: center; color: var(--text-tertiary); font-size: .92rem; margin-top: 16px; padding: 0 10px; }
 .mslide__cap b { color: var(--text-primary); font-weight: 600; }
