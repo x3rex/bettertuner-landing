@@ -131,6 +131,28 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.
 .nav__links a:hover::after { width: 100%; }
 .nav__cta { margin-left: 4px; padding: 9px 18px; }
 
+/* Mobile hamburger + dropdown menu (shown ≤920px) */
+.nav__toggle {
+  display: none; margin-left: auto; width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid var(--hairline); border-radius: 10px; background: transparent; cursor: pointer;
+  flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+}
+.nav__toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--text-primary); transition: transform .22s var(--ease), opacity .15s; }
+.nav.is-menu-open .nav__toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav.is-menu-open .nav__toggle span:nth-child(2) { opacity: 0; }
+.nav.is-menu-open .nav__toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.nav__menu {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: rgba(8,8,11,.97); backdrop-filter: saturate(140%) blur(16px); -webkit-backdrop-filter: saturate(140%) blur(16px);
+  border-bottom: 1px solid var(--hairline);
+  padding: 8px 28px 22px; display: flex; flex-direction: column;
+}
+.nav__menu[hidden] { display: none; }
+.nav__menu a:not(.nav__menu-cta) { padding: 14px 2px; color: var(--text-secondary); font-size: 1.02rem; border-bottom: 1px solid var(--hairline); }
+.nav__menu a:not(.nav__menu-cta):active { color: var(--text-primary); }
+.nav__menu-cta { margin-top: 16px; justify-content: center; }
+@media (min-width: 921px) { .nav__menu { display: none !important; } }
+
 /* ---------- Layout ---------- */
 main { display: block; }
 .section { max-width: var(--maxw); margin: 0 auto; padding: clamp(70px, 12vw, 140px) 28px; }
@@ -839,6 +861,8 @@ main { display: block; }
   .chords-capo__fig { width: 120px; }
   .trainer-grid { grid-template-columns: 1fr; max-width: 420px; }
   .nav__links { display: none; }
+  .nav__cta { display: none; }
+  .nav__toggle { display: flex; }
   .check-list { text-align: left; }
 }
 @media (max-width: 600px) {

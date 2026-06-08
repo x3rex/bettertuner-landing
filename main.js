@@ -24,6 +24,22 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  /* ---- Mobile hamburger menu ---- */
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const navMenu = document.querySelector("[data-nav-menu]");
+  if (navToggle && navMenu && nav) {
+    const setMenu = (open) => {
+      navMenu.hidden = !open;
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      nav.classList.toggle("is-menu-open", open);
+    };
+    navToggle.addEventListener("click", () => setMenu(navMenu.hidden));
+    navMenu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+    window.addEventListener("resize", () => { if (window.innerWidth > 920) setMenu(false); });
+  }
+
   /* ---- Scroll-reveal with stagger ---- */
   const revealables = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduceMotion) {
