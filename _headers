@@ -1,0 +1,17 @@
+# Security headers for static hosting (Netlify / Cloudflare Pages read this file).
+# For Vercel use vercel.json; GitHub Pages can't set headers — the <meta> CSP in
+# index.html is the fallback there.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+# Fonts are content-hashed and never change — cache them hard.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

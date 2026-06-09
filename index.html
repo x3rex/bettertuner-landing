@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSP fallback for hosts that can't send headers (e.g. GitHub Pages).
+       frame-ancestors / HSTS only work as real headers — see the _headers file. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
   <title>BetterTuner: the tuner, metronome & practice studio for every musician</title>
   <meta name="description" content="A precision chromatic tuner, expressive metronome, and complete practice studio in one app. 28 instruments, 60+ tunings, Indian classical tanpura & talas, real-time visualizers, and on-device pitch detection." />
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://bettertuner.com/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Self-hosted fonts — no third-party requests (see assets/fonts.css). -->
+  <link rel="preload" href="assets/fonts/space-grotesk-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/fonts.css" />
 
   <!-- Open Graph / social -->
   <meta property="og:type" content="website" />
@@ -92,8 +96,8 @@
       <!-- Animated phone mockup -->
       <div class="hero__device reveal" data-tilt>
         <div class="phone">
-          <div class="phone__notch"></div>
           <div class="phone__screen">
+            <div class="phone__island"><span class="phone__camera"></span></div>
             <div class="app-tuner">
               <div class="app-tuner__head">
                 <span class="app-pill">Guitar · Standard</span>
@@ -259,25 +263,49 @@
         <!-- Chords — fretboard shape -->
         <article class="feature-card reveal">
           <div class="feature-card__preview">
-            <svg class="pv-chord" viewBox="0 0 66 74" aria-hidden="true">
-              <g stroke="var(--wire)" stroke-width="1.4" stroke-linecap="round">
-                <line x1="6"  y1="12" x2="6"  y2="66"/>
-                <line x1="17" y1="12" x2="17" y2="66"/>
-                <line x1="28" y1="12" x2="28" y2="66"/>
-                <line x1="39" y1="12" x2="39" y2="66"/>
-                <line x1="50" y1="12" x2="50" y2="66"/>
-                <line x1="61" y1="12" x2="61" y2="66"/>
-                <line x1="6" y1="30" x2="61" y2="30"/>
-                <line x1="6" y1="48" x2="61" y2="48"/>
-                <line x1="6" y1="66" x2="61" y2="66"/>
-              </g>
-              <line x1="6" y1="12" x2="61" y2="12" stroke="var(--text-tertiary)" stroke-width="3" stroke-linecap="round"/>
-              <g class="pv-chord__dots" fill="var(--cyan)">
-                <circle cx="28" cy="21" r="4.4" style="animation-delay:0s"/>
-                <circle cx="39" cy="39" r="4.4" style="animation-delay:.15s"/>
-                <circle cx="50" cy="39" r="4.4" style="animation-delay:.3s"/>
-              </g>
-            </svg>
+            <div class="pv-chords">
+              <!-- Guitar -->
+              <svg class="pv-fb" viewBox="0 0 50 60" aria-hidden="true">
+                <g stroke="var(--wire)" stroke-width="1.3" stroke-linecap="round">
+                  <line x1="5" y1="10" x2="5" y2="54"/><line x1="13" y1="10" x2="13" y2="54"/><line x1="21" y1="10" x2="21" y2="54"/><line x1="29" y1="10" x2="29" y2="54"/><line x1="37" y1="10" x2="37" y2="54"/><line x1="45" y1="10" x2="45" y2="54"/>
+                  <line x1="5" y1="25" x2="45" y2="25"/><line x1="5" y1="40" x2="45" y2="40"/><line x1="5" y1="54" x2="45" y2="54"/>
+                </g>
+                <line x1="5" y1="10" x2="45" y2="10" stroke="var(--text-tertiary)" stroke-width="2.4" stroke-linecap="round"/>
+                <g class="pv-chord__dots" fill="var(--cyan)">
+                  <circle cx="21" cy="17.5" r="3.4" style="animation-delay:0s"/>
+                  <circle cx="29" cy="32.5" r="3.4" style="animation-delay:.12s"/>
+                  <circle cx="37" cy="32.5" r="3.4" style="animation-delay:.24s"/>
+                </g>
+              </svg>
+              <!-- Ukulele -->
+              <svg class="pv-fb" viewBox="0 0 37 60" aria-hidden="true">
+                <g stroke="var(--wire)" stroke-width="1.3" stroke-linecap="round">
+                  <line x1="5" y1="10" x2="5" y2="54"/><line x1="14" y1="10" x2="14" y2="54"/><line x1="23" y1="10" x2="23" y2="54"/><line x1="32" y1="10" x2="32" y2="54"/>
+                  <line x1="5" y1="25" x2="32" y2="25"/><line x1="5" y1="40" x2="32" y2="40"/><line x1="5" y1="54" x2="32" y2="54"/>
+                </g>
+                <line x1="5" y1="10" x2="32" y2="10" stroke="var(--text-tertiary)" stroke-width="2.4" stroke-linecap="round"/>
+                <g class="pv-chord__dots" fill="var(--cyan)">
+                  <circle cx="14" cy="32.5" r="3.4" style="animation-delay:.1s"/>
+                  <circle cx="23" cy="47" r="3.4" style="animation-delay:.22s"/>
+                  <circle cx="32" cy="32.5" r="3.4" style="animation-delay:.34s"/>
+                </g>
+              </svg>
+              <!-- Piano -->
+              <svg class="pv-piano" viewBox="0 0 56 44" aria-hidden="true">
+                <g class="pv-piano__w">
+                  <rect class="hl" x="0"  y="1" width="7.4" height="42" style="animation-delay:0s"/>
+                  <rect x="8"  y="1" width="7.4" height="42"/>
+                  <rect class="hl" x="16" y="1" width="7.4" height="42" style="animation-delay:.12s"/>
+                  <rect x="24" y="1" width="7.4" height="42"/>
+                  <rect class="hl" x="32" y="1" width="7.4" height="42" style="animation-delay:.24s"/>
+                  <rect x="40" y="1" width="7.4" height="42"/>
+                  <rect x="48" y="1" width="7.4" height="42"/>
+                </g>
+                <g class="pv-piano__b">
+                  <rect x="5.4"  y="1" width="4.6" height="26"/><rect x="13.4" y="1" width="4.6" height="26"/><rect x="29.4" y="1" width="4.6" height="26"/><rect x="37.4" y="1" width="4.6" height="26"/><rect x="45.4" y="1" width="4.6" height="26"/>
+                </g>
+              </svg>
+            </div>
           </div>
           <h3>Chords, decoded</h3>
           <p>Browse fretboard and piano voicings with smart fingering and capo transposition for guitar, ukulele and keys.</p>
@@ -313,18 +341,18 @@
             <div class="htune">
               <div class="htune__track"><span class="htune__zone"></span><i class="htune__dot"></i></div>
               <div class="htune__labels lblwrap">
-                <span class="lbl lbl--off">E&nbsp;·&nbsp;tuning…</span>
-                <span class="lbl lbl--in">E&nbsp;·&nbsp;in tune</span>
+                <span class="lbl lbl--off">E4&nbsp;·&nbsp;tuning…</span>
+                <span class="lbl lbl--in">E4&nbsp;·&nbsp;in tune</span>
               </div>
             </div>
             <div class="viz-headstock">
               <img src="assets/guitar.webp" alt="Photo-real guitar headstock tuner" loading="lazy" width="1696" height="2520" />
-              <span class="hpeg" style="left:14%"></span>
-              <span class="hpeg" style="left:28.4%"></span>
-              <span class="hpeg hpeg--intune" style="left:42.8%"></span>
-              <span class="hpeg" style="left:57.2%"></span>
-              <span class="hpeg hpeg--amber" style="left:71.6%"></span>
-              <span class="hpeg" style="left:86%"></span>
+              <span class="hpeg" style="left:14%"><i>E2</i></span>
+              <span class="hpeg" style="left:28.4%"><i>A2</i></span>
+              <span class="hpeg" style="left:42.8%"><i>D3</i></span>
+              <span class="hpeg" style="left:57.2%"><i>G3</i></span>
+              <span class="hpeg" style="left:71.6%"><i>B3</i></span>
+              <span class="hpeg hpeg--active" style="left:86%"><i>E4</i></span>
             </div>
           </div>
           <figcaption>
@@ -868,7 +896,7 @@
                 <svg class="vt-wave" viewBox="0 0 300 80" preserveAspectRatio="none">
                   <rect class="band" x="0" y="32" width="300" height="16"/>
                   <line class="zero" x1="0" y1="40" x2="300" y2="40"/>
-                  <g class="vt-pitch"><g class="vt-trace-g"><path d="M0 40 q20 -16 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none"/></g></g>
+                  <path class="vt-line" data-vt-line fill="none" d="M0 40 L300 40"/>
                 </svg>
               </div>
               <div class="vt-hold"><i data-vt-hold></i></div>
@@ -932,7 +960,7 @@
           <article class="glass-card reveal">
             <div class="ic-stage">
               <div class="sargam" aria-hidden="true">
-                <span><b>सा</b><i>Sa</i></span><span><b>रे</b><i>Re</i></span><span><b>ग</b><i>Ga</i></span><span><b>म</b><i>Ma</i></span><span><b>प</b><i>Pa</i></span><span><b>ध</b><i>Dha</i></span><span><b>नि</b><i>Ni</i></span><span><b>सां</b><i>Sa'</i></span>
+                <span><b>सा</b><em>সা</em><i>Sa</i></span><span><b>रे</b><em>রে</em><i>Re</i></span><span><b>गा</b><em>গা</em><i>Ga</i></span><span><b>मा</b><em>মা</em><i>Ma</i></span><span><b>पा</b><em>পা</em><i>Pa</i></span><span><b>धा</b><em>ধা</em><i>Dha</i></span><span><b>नि</b><em>নি</em><i>Ni</i></span><span><b>सां</b><em>র্সা</em><i>Sa'</i></span>
               </div>
             </div>
             <h3>Sargam &amp; swara labels</h3>
@@ -996,11 +1024,11 @@
         <p>Coming soon to the App Store and Google Play. Tune precisely, keep perfect time, and grow as a musician on every instrument.</p>
         <div class="store-badges">
           <a class="store-badge" href="#" aria-label="Download on the App Store (coming soon)">
-            <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2 1.6-3 1.7-3a3.7 3.7 0 0 0-2.9-1.6c-1.2-.1-2.4.7-3 .7s-1.6-.7-2.6-.7A3.9 3.9 0 0 0 4.3 10c-1.4 2.5-.4 6.2 1 8.2.7 1 1.5 2.1 2.5 2.1s1.3-.6 2.5-.6 1.5.6 2.6.6 1.7-1 2.4-2a8.6 8.6 0 0 0 1.1-2.2 3.6 3.6 0 0 1-2-3.5ZM14.5 6.2A3.5 3.5 0 0 0 15.3 3a3.6 3.6 0 0 0-2.3 1.2 3.3 3.3 0 0 0-.8 3 3 3 0 0 0 2.3-1Z"/></svg>
+            <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path fill="currentColor" d="M17.05 12.536c-.024-2.65 2.165-3.92 2.264-3.984-1.234-1.804-3.155-2.052-3.838-2.08-1.634-.166-3.19.962-4.018.962-.83 0-2.105-.938-3.463-.912-1.782.026-3.426 1.036-4.344 2.632-1.852 3.21-.474 7.962 1.328 10.568.88 1.276 1.928 2.708 3.302 2.658 1.324-.052 1.824-.858 3.424-.858 1.6 0 2.05.858 3.452.832 1.426-.026 2.328-1.302 3.2-2.582 1.008-1.482 1.422-2.918 1.446-2.992-.032-.014-2.774-1.064-2.802-4.222zM14.38 4.74c.732-.888 1.226-2.122 1.09-3.35-1.054.043-2.33.702-3.086 1.588-.678.786-1.272 2.042-1.112 3.246 1.176.091 2.376-.597 3.108-1.484z"/></svg>
             <span><small>Coming soon to the</small><strong>App Store</strong></span>
           </a>
           <a class="store-badge" href="#" aria-label="Get it on Google Play (coming soon)">
-            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M3.6 2.3 13.4 12 3.6 21.7a1.3 1.3 0 0 1-.6-1.1V3.4a1.3 1.3 0 0 1 .6-1.1Zm11.2 8.3 2.6 1.5-2.6 1.4-2.1-1.4ZM5 2.6l9.1 5.3-1.9 1.9Zm0 18.8 7.2-7.2 1.9 1.9Z"/></svg>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11.05 10.989c.303.046.624-.006.926-.177l13.304-7.532z"/></svg>
             <span><small>Coming soon to</small><strong>Google Play</strong></span>
           </a>
         </div>

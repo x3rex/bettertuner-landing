@@ -8,7 +8,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Inline the SVG logo wherever [data-logo] appears ---- */
-  const LOGO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473.12 485.77" aria-hidden="true"><g fill="currentColor"><path d="M243.78,158.1c-74.95,-11.25 -144.23,44.5 -147.91,120.13 -0.13,2.59 -2.5,4.47 -4,4.48 -1.99,0.01 -5.19,-1.4 -5.18,-4.6 0.28,-63.57 39.8,-120.4 99.72,-142.57 37.16,-13.75 77.2,-10.57 113.84,5.5 l-20.97,28.77 c-11.71,-5.91 -22.73,-9.78 -35.5,-11.7Z"/><path d="M350.59,280.81c-0.93,-25.49 -6.96,-48.46 -21.07,-69.41 l14.89,-36.59 c25.73,28.64 41.14,64.98 42.48,103.29 0.38,10.84 -7.1,18.94 -16.5,19.97 -9.6,1.05 -19.37,-5.58 -19.79,-17.26Z"/><path d="M331.49,122.86l-128.81,176.94 c-11.99,16.48 -11.36,39.05 5.76,52.09 10.33,7.86 23.17,9.67 35.64,5.51 9.42,-3.14 18.24,-11.13 22.63,-22.57 l30.82,-80.35 67.95,-176.44 -33.99,44.82ZM249.19,330.85c-4.43,11.35 -17.71,13.36 -27.06,9.05 -7.47,-3.45 -14.17,-17.53 -7.45,-26.73 l88.97,-121.94 -54.46,139.62Z"/></g></svg>`;
+  const LOGO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473.12 485.77" aria-hidden="true"><g fill="currentColor"><path d="M243.78,158.1c-74.95,-11.25 -144.23,44.5 -147.91,120.13 -0.13,2.59 -2.5,4.47 -4,4.48 -1.99,0.01 -5.19,-1.4 -5.18,-4.6 0.28,-63.57 39.8,-120.4 99.72,-142.57 37.16,-13.75 77.2,-10.57 113.84,5.5 l-20.97,28.77 c-11.71,-5.91 -22.73,-9.78 -35.5,-11.7Z"/><path d="M350.59,280.81c-0.93,-25.49 -6.96,-48.46 -21.07,-69.41 l14.89,-36.59 c25.73,28.64 41.14,64.98 42.48,103.29 0.38,10.84 -7.1,18.94 -16.5,19.97 -9.6,1.05 -19.37,-5.58 -19.79,-17.26Z"/><path class="logo-stick" d="M331.49,122.86l-128.81,176.94 c-11.99,16.48 -11.36,39.05 5.76,52.09 10.33,7.86 23.17,9.67 35.64,5.51 9.42,-3.14 18.24,-11.13 22.63,-22.57 l30.82,-80.35 67.95,-176.44 -33.99,44.82ZM249.19,330.85c-4.43,11.35 -17.71,13.36 -27.06,9.05 -7.47,-3.45 -14.17,-17.53 -7.45,-26.73 l88.97,-121.94 -54.46,139.62Z"/></g></svg>`;
   document.querySelectorAll("[data-logo]").forEach((el) => { el.innerHTML = LOGO; });
 
   /* ---- Current year in footer ---- */
@@ -136,6 +136,22 @@
     dots.forEach((d, di) => d.addEventListener("click", () => nudge(di)));
     slider.addEventListener("mouseenter", stop);
     slider.addEventListener("mouseleave", start);
+
+    // Touch swipe (mobile): drag the card horizontally to change slides — the
+    // arrows are hidden on small screens, so this is the primary control.
+    let tx = 0, ty = 0, tracking = false;
+    viewport?.addEventListener("touchstart", (e) => {
+      tx = e.touches[0].clientX; ty = e.touches[0].clientY; tracking = true; stop();
+    }, { passive: true });
+    viewport?.addEventListener("touchend", (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - tx;
+      const dy = e.changedTouches[0].clientY - ty;
+      // Horizontal intent only, and enough travel to count as a swipe.
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) nudge(idx + (dx < 0 ? 1 : -1));
+      else start();
+    }, { passive: true });
     window.addEventListener("resize", fit);
     window.addEventListener("load", fit);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
@@ -307,15 +323,29 @@
     const OFFS = [-12, 9, -15, 7, -18, 11, -8, 6];
     const vSwara = q("[data-vt-swara]"), vHz = q("[data-vt-hz]"), vStep = q("[data-vt-step]"),
       vProg = q("[data-vt-prog]"), vCents = q("[data-vt-cents]"), vHold = q("[data-vt-hold]"),
-      vTrace = q(".vt-trace"), vPitch = q(".vt-pitch");
+      vTrace = q(".vt-trace"), vLine = q("[data-vt-line]");
 
-    let wander = null;
-    const setWander = (fn, ms) => { if (wander) clearInterval(wander); wander = fn ? setInterval(fn, ms) : null; };
-    // Move the trace line off-centre (sharp = up, flat = down) with a little
-    // jitter, like an unsteady voice hunting for the note.
-    const drift = (base, jit) => () => {
-      vPitch.style.transform = `translateY(${(base + (Math.random() * 2 - 1) * jit).toFixed(1)}px)`;
+    // Pitch-contour engine — instead of a clean sine, draw a real pitch trace:
+    // a near-horizontal line whose height is cents deviation over time. It scoops
+    // into each note (a smoothing lag), wavers while the voice hunts for pitch,
+    // then settles into the centre band with a gentle vibrato once locked in.
+    const N = 72, DX = 300 / (N - 1), CENTER = 40;   // SVG units (viewBox 300×80)
+    const buf = new Array(N).fill(CENTER);
+    const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v);
+    const pen = { target: CENTER, jitter: 6.5, vib: 0, follow: 0.16 };
+    let cur = CENTER, vph = 0;
+    const drawLine = () => {
+      let d = "M0 " + buf[0].toFixed(1);
+      for (let i = 1; i < N; i++) d += "L" + (i * DX).toFixed(1) + " " + buf[i].toFixed(1);
+      vLine.setAttribute("d", d);
     };
+    function frame() {
+      vph += 0.55;                              // vibrato phase
+      cur += (pen.target - cur) * pen.follow;   // ease toward target → scoop / glide between notes
+      buf.push(clamp(cur + Math.sin(vph) * pen.vib + (Math.random() * 2 - 1) * pen.jitter, 6, 74));
+      buf.shift();
+      drawLine();
+    }
 
     function vocalStep(i) {
       const [name, hz] = SWARAS[i];
@@ -330,14 +360,15 @@
       vTrace.className = "vt-trace " + (flat ? "is-flat" : "is-sharp");
       vHold.style.transition = "none";
       vHold.style.width = "0%";
-      // Searching: wander off-pitch, sharp drifts up (−y), flat drifts down (+y).
-      setWander(drift(flat ? 13 : -13, 6), 170);
-      // Then lock in: settle to the centre band, steady tiny vibrato, fill hold.
+      // Searching: aim above (sharp) / below (flat) the band, unsteady, no vibrato.
+      pen.target = CENTER + (flat ? 22 : -20);
+      pen.jitter = 6.5; pen.vib = 0; pen.follow = 0.16;
+      // Then lock in: glide to the centre band and hold steady with a gentle vibrato.
       setTimeout(() => {
         vCents.textContent = "In tune";
         vCents.className = "vt-cents is-in";
         vTrace.className = "vt-trace is-in";
-        setWander(drift(0, 2), 240);
+        pen.target = CENTER; pen.jitter = 1.2; pen.vib = 3.2; pen.follow = 0.1;
         vHold.style.transition = "width 1.15s linear";
         vHold.style.width = "100%";
       }, 1050);
@@ -377,10 +408,12 @@
     }
 
     if (reduceMotion) {
-      // Rest on a settled "Ga" without any timers.
+      // Rest on a settled "Ga" without any timers — draw one static, steady trace.
       vSwara.textContent = "Ga"; vHz.textContent = "329.6 Hz"; vStep.textContent = "Step 3 of 8";
       vProg.style.width = "37%"; vCents.textContent = "In tune"; vCents.className = "vt-cents is-in";
       vTrace.className = "vt-trace is-in"; vHold.style.width = "100%";
+      for (let i = 0; i < N; i++) buf[i] = CENTER + Math.sin(i * 0.5) * 2.2;
+      drawLine();
       banner("WHICH SWARA?", "neutral");
       choices[1].classList.add("sel");
       return;
@@ -388,17 +421,49 @@
 
     let vi = 0;
     vocalStep(0);
+    drawLine();
+    setInterval(frame, 55);
     setInterval(() => { vi = (vi + 1) % SWARAS.length; vocalStep(vi); }, 2400);
     setInterval(earTick, 1100);
   })();
 
-  /* ---- Metronome: stagger the tala / compás playhead sweep ---- */
-  document.querySelectorAll(".ms-tala, .ms-compas").forEach((grp) => {
-    const dur = grp.classList.contains("ms-compas") ? 3 : 4;
-    const dots = grp.querySelectorAll(".bdot");
-    const step = dur / dots.length;
-    dots.forEach((d, i) => { d.style.animationDelay = (i * step).toFixed(3) + "s"; });
-  });
+  /* ---- Metronome playheads: a single beat clock steps through each pattern,
+     so Teental, the bulería compás and the step sequencer animate the way they
+     are actually counted — one moving playhead, hitting each beat in turn.
+     (Reduced motion leaves the static, fully-labelled frame untouched.) ---- */
+  if (!reduceMotion) {
+    // Tala (16 mātrā) + compás (12 beats): one highlight moves beat to beat,
+    // in DOM order, which matches the counted order left-to-right.
+    document.querySelectorAll(".ms-tala, .ms-compas").forEach((grp) => {
+      const dots = [...grp.querySelectorAll(".bdot")];
+      if (!dots.length) return;
+      const bpm = grp.classList.contains("ms-compas") ? 230 : 190; // visual tempo
+      let i = -1;
+      setInterval(() => {
+        if (i >= 0) dots[i].classList.remove("is-hit");
+        i = (i + 1) % dots.length;
+        dots[i].classList.add("is-hit");
+      }, 60000 / bpm);
+    });
+
+    // Step sequencer: one shared clock ticks at the finest subdivision on the
+    // grid (the 1/8 hi-hat = 8 ticks/bar). Each lane maps that tick onto its OWN
+    // step count, so the hi-hat advances every tick while the 1/4 kick & snare
+    // hold each step for two — i.e. the lanes run independently, as they should.
+    document.querySelectorAll(".seqgrid").forEach((grid) => {
+      const lanes = [...grid.querySelectorAll(".lane")].map((l) => [...l.querySelectorAll(".cell")]);
+      if (!lanes.length) return;
+      const ticks = Math.max(...lanes.map((cells) => cells.length)); // finest grid
+      if (!ticks) return;
+      const stepOf = (cells, t) => cells[Math.floor((t * cells.length) / ticks)];
+      let t = -1;
+      setInterval(() => {
+        if (t >= 0) lanes.forEach((cells) => stepOf(cells, t)?.classList.remove("is-step"));
+        t = (t + 1) % ticks;
+        lanes.forEach((cells) => stepOf(cells, t)?.classList.add("is-step"));
+      }, 60000 / 300); // 8 eighth-notes/bar at ~150 BPM (300 eighths/min)
+    });
+  }
 
   /* ---- Subtle pointer tilt on the hero device ---- */
   const tilt = document.querySelector("[data-tilt] .phone");

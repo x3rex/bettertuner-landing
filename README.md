@@ -31,14 +31,17 @@ feel like one thing. The logo is the app's adaptive-icon mark.
 
 ```
 website/
-├── index.html        # the page
+├── index.html        # the page (+ <meta> CSP fallback)
 ├── styles.css        # all styling + animations
 ├── main.js           # progressive-enhancement interactions
+├── _headers          # security headers (Netlify / Cloudflare Pages)
 ├── README.md
 └── assets/
     ├── logo.svg          # brand mark
     ├── favicon.svg
     ├── og-image.svg      # social share card
+    ├── fonts.css         # @font-face for the self-hosted fonts
+    ├── fonts/            # subsetted woff2 (Space Grotesk, Inter, Noto Sans Bengali)
     └── *.webp            # instrument photography (from the app repo)
 ```
 
@@ -69,10 +72,15 @@ Drop the `website/` folder onto any static host:
 
 - **Store badges** in the download section currently link to `#` — swap in the
   real App Store / Google Play URLs once the listings are live.
-- The page loads **Space Grotesk + Inter** from Google Fonts for typographic
-  polish. To make the site fully offline/self-contained, self-host those fonts
-  (or delete the `<link>` tags — the CSS already falls back to a strong system
-  font stack).
+- **Fonts are self-hosted** (`assets/fonts/`, subsetted woff2) — no third-party
+  requests, so the site is fully offline/self-contained and the CSP can stay
+  strict. To regenerate after changing weights/subsets, re-fetch from Google
+  Fonts and re-subset with `fonttools` (latin + latin-ext for the Latin faces,
+  the swara glyphs only for Noto Sans Bengali).
+- **Security headers** live in `_headers` (CSP, `frame-ancestors`, `nosniff`,
+  `Referrer-Policy`, HSTS), read by Netlify / Cloudflare Pages. For **Vercel**
+  add the equivalent `headers` block in `vercel.json`; **GitHub Pages** can't set
+  headers, so the `<meta>` CSP in `index.html` is the fallback there.
 - `og-image.svg` is provided for social cards. Some platforms prefer raster;
   export it to a 1200×630 PNG (`og-image.png`) and update the meta tag if needed.
 - Replace the placeholder copyright/links in the footer as the brand evolves.

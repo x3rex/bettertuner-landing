@@ -34,6 +34,7 @@
   --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --font-bangla:  "Noto Sans Bengali", "Nirmala UI", "Vrinda", sans-serif;
 
   --maxw: 1140px;
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -124,6 +125,29 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.
 .nav__logo { width: 24px; height: 24px; color: var(--cyan); display: inline-block; }
 .nav__logo svg { width: 100%; height: 100%; display: block; }
 .nav__logo--lg { width: 56px; height: 56px; }
+/* CTA logo: the diagonal "tuning stick" swings like a real tuner needle —
+   hunting off-pitch, then settling dead-centre (in tune) — while the arc stays
+   put. The whole mark glows brightest at the moment it locks in. */
+.cta__inner .nav__logo--lg { animation: ctaLogoGlow 4.5s ease-in-out infinite; }
+.cta__inner .nav__logo--lg .logo-stick {
+  transform-box: view-box;
+  transform-origin: 218px 344px;   /* pivot at the base of the needle */
+  animation: ctaNeedle 4.5s var(--ease) infinite;
+}
+@keyframes ctaNeedle {
+  0%, 12%   { transform: rotate(0deg); }
+  24%       { transform: rotate(-15deg); }
+  38%       { transform: rotate(11deg); }
+  50%       { transform: rotate(-7deg); }
+  62%       { transform: rotate(4deg); }
+  72%       { transform: rotate(-2deg); }
+  80%, 100% { transform: rotate(0deg); }
+}
+@keyframes ctaLogoGlow {
+  0%, 12%   { filter: drop-shadow(0 0 16px rgba(0,229,255,.75)); }
+  30%, 70%  { filter: drop-shadow(0 0 6px rgba(0,229,255,.25)); }
+  80%, 100% { filter: drop-shadow(0 0 16px rgba(0,229,255,.75)); }
+}
 .nav__links { display: flex; gap: 26px; margin-left: auto; font-size: .95rem; color: var(--text-secondary); }
 .nav__links a { position: relative; transition: color .2s; }
 .nav__links a::after { content: ""; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--cyan); transition: width .25s var(--ease); }
@@ -180,8 +204,8 @@ main { display: block; }
   position: relative;
   width: 300px; height: 620px;
   background: #0a0a0d;
-  border-radius: 44px;
-  padding: 12px;
+  border-radius: 48px;
+  padding: 7px;
   border: 1px solid rgba(255,255,255,.1);
   box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.03);
   transform: rotateY(-14deg) rotateX(6deg) rotateZ(1deg);
@@ -190,20 +214,29 @@ main { display: block; }
   animation: floaty 7s ease-in-out infinite;
 }
 @keyframes floaty { 50% { transform: rotateY(-14deg) rotateX(6deg) translateY(-14px); } }
-.phone__notch { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 92px; height: 22px; background: #050507; border-radius: 0 0 14px 14px; z-index: 3; }
 .phone__screen {
-  position: relative; height: 100%; border-radius: 34px; overflow: hidden;
+  position: relative; height: 100%; border-radius: 42px; overflow: hidden;
   background: radial-gradient(120% 80% at 50% 0%, #101018, #050507 70%);
   display: flex; flex-direction: column;
 }
+/* iPhone 16 Pro Dynamic Island */
+.phone__island {
+  position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
+  width: 94px; height: 28px; background: #000; border-radius: 999px; z-index: 6;
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 9px;
+}
+.phone__camera { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #24384a, #000 68%); box-shadow: inset 0 0 1px rgba(90,150,210,.7); }
 .device-glow {
-  position: absolute; inset: 14% -6% -16% -6%; z-index: -1;
-  background: radial-gradient(closest-side, rgba(0,229,255,.16), transparent 70%);
-  filter: blur(50px);
+  position: absolute; inset: 2% -16% -16% -16%; z-index: -1;
+  /* Neon duotone halo behind the device — lifts the phone off the dark bg. */
+  background:
+    radial-gradient(closest-side, rgba(0,229,255,.34), transparent 72%),
+    radial-gradient(closest-side at 74% 74%, rgba(177,139,255,.24), transparent 74%);
+  filter: blur(62px);
 }
 
 /* App tuner UI inside phone */
-.app-tuner { flex: 1; padding: 44px 18px 10px; display: flex; flex-direction: column; gap: 14px; }
+.app-tuner { flex: 1; padding: 56px 18px 10px; display: flex; flex-direction: column; gap: 14px; }
 .app-tuner__head { display: flex; justify-content: space-between; }
 .app-pill { font-size: .68rem; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.05); color: var(--text-secondary); letter-spacing: .03em; }
 .app-pill--muted { color: var(--text-tertiary); font-family: var(--font-mono); }
@@ -313,7 +346,12 @@ main { display: block; }
 @keyframes pvBeat { 0% { transform: scale(1.55); filter: brightness(1.9); } 14%, 100% { transform: scale(1); filter: brightness(1); } }
 
 /* Chord diagram — cyan finger dots, like the app */
-.pv-chord { height: 72px; }
+.pv-chords { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; }
+.pv-fb { height: 58px; width: auto; }
+.pv-piano { height: 44px; width: auto; }
+.pv-piano__w rect { fill: #16161c; stroke: #05050a; stroke-width: .6; }
+.pv-piano__w .hl { fill: color-mix(in srgb, var(--cyan) 78%, #0d0d11); filter: drop-shadow(0 0 4px rgba(0,229,255,.5)); animation: pvBreathe 3.2s ease-in-out infinite; }
+.pv-piano__b rect { fill: #050507; }
 .pv-chord__dots circle { filter: drop-shadow(0 0 5px var(--cyan)); animation: pvDot 3.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
 @keyframes pvDot { 0%, 78%, 100% { opacity: 1; transform: scale(1); } 88% { opacity: .45; transform: scale(.72); } }
 
@@ -434,12 +472,20 @@ main { display: block; }
 .viz-headstock { position: relative; height: calc(100% - 42px); display: flex; }
 .viz-headstock img { height: 100%; width: auto; max-width: 100%; display: block; object-fit: contain; }
 .hpeg {
-  position: absolute; top: 93%; transform: translate(-50%, -50%);
-  width: 13px; height: 13px; border-radius: 50%; background: var(--text-tertiary);
-  box-shadow: 0 0 0 3px rgba(0,0,0,.45);
+  position: absolute; top: 88%; transform: translate(-50%, -50%);
+  width: 12px; height: 12px; border-radius: 50%; background: var(--text-tertiary);
+  box-shadow: 0 0 0 3px rgba(0,0,0,.45); opacity: .55;
 }
-.hpeg--intune { background: var(--cyan); box-shadow: 0 0 0 4px rgba(0,229,255,.14), 0 0 12px var(--cyan); animation: pulse 2s ease-in-out infinite; }
-.hpeg--amber { background: var(--amber); box-shadow: 0 0 0 4px rgba(255,179,0,.14), 0 0 12px var(--amber); }
+.hpeg i {
+  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+  font-style: normal; font-family: var(--font-mono); font-size: .62rem;
+  color: var(--text-tertiary); letter-spacing: .04em;
+}
+/* The string currently being tuned (E): the peg and its label track the shared
+   tuning state — magenta / amber while off, cyan when it locks in — in sync with
+   the indicator up top, so the lit peg always points at the right string. */
+.hpeg--active { opacity: 1; animation: tuneFill 5s linear infinite; }
+.hpeg--active i { color: var(--cyan); font-weight: 700; animation: tuneColor 5s linear infinite; }
 
 /* Ladder */
 .viz-ladder { width: 86%; display: flex; flex-direction: column; gap: 8px; }
@@ -569,13 +615,18 @@ main { display: block; }
 .vibhag { display: flex; justify-content: space-around; gap: 6px; padding: 10px 8px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--hairline); }
 .ms-compas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; justify-items: center; }
 .bcell { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-/* Playhead sweep — each mātrā / beat flashes in turn (delays set in main.js). */
-.ms-tala .bdot, .ms-compas .bdot { animation: mStep 4s linear infinite; }
-.ms-compas .bdot { animation-duration: 3s; }
-@keyframes mStep {
-  0% { transform: scale(1.55); box-shadow: 0 0 0 3px rgba(255,255,255,.16), 0 0 9px rgba(255,255,255,.3); }
-  10%, 100% { transform: scale(1); box-shadow: none; }
+/* Playhead — a single moving highlight steps through the mātrās / beats in
+   counted order (driven by a beat clock in main.js). Ordinary beats glow white
+   as the head passes; sam, tali and khali pop in their own colours so the
+   structure of the tala / compás reads at a glance. */
+.ms-tala .bdot, .ms-compas .bdot {
+  transition: transform .13s var(--ease), box-shadow .16s ease, background-color .16s ease;
 }
+.bdot.is-hit { transform: scale(1.5); box-shadow: 0 0 0 3px rgba(255,255,255,.14), 0 0 10px rgba(255,255,255,.38); }
+.bdot:not(.bdot--sam):not(.bdot--tali):not(.bdot--khali).is-hit { background: #fff; }
+.bdot--sam.is-hit   { transform: scale(1.7); box-shadow: 0 0 0 4px color-mix(in srgb, var(--cyan) 32%, transparent), 0 0 16px var(--cyan); }
+.bdot--tali.is-hit  { box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber) 32%, transparent), 0 0 13px var(--amber); }
+.bdot--khali.is-hit { opacity: 1; box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 30%, transparent), 0 0 12px var(--magenta); }
 .bcell i { font-style: normal; font-family: var(--font-mono); font-size: .68rem; color: var(--text-tertiary); }
 .ms-legend { display: flex; gap: 18px; font-size: .76rem; color: var(--text-secondary); }
 .ms-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
@@ -596,13 +647,16 @@ main { display: block; }
 .lane { display: flex; flex-direction: column; gap: 6px; }
 .lane__name { font-family: var(--font-mono); font-size: .8rem; color: var(--c); }
 .lane__steps { display: flex; gap: 6px; height: 26px; }
-.beatcol { position: relative; flex: 1; display: flex; gap: 3px; border-radius: 6px; animation: seqChase 2s linear infinite; animation-delay: var(--bd); }
-.cell { flex: 1; border-radius: 4px; background: var(--surface-elevated); }
+.beatcol { position: relative; flex: 1; display: flex; gap: 3px; border-radius: 6px; }
+.cell { flex: 1; border-radius: 4px; background: var(--surface-elevated); transition: filter .09s ease, box-shadow .13s ease, background-color .12s ease; }
 /* Softer fills: blend the lane colour toward the surface, gentle glow. */
-.cell.on { background: color-mix(in srgb, var(--c) 82%, #0d0d11); box-shadow: 0 0 4px color-mix(in srgb, var(--c) 25%, transparent); animation: cellFire 2s linear infinite; animation-delay: var(--bd); }
-@keyframes seqChase { 0% { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--cyan) 70%, transparent); } 25%, 100% { box-shadow: inset 0 0 0 1.5px transparent; } }
-/* Lit cells brighten as the playhead column reaches them. */
-@keyframes cellFire { 0% { filter: brightness(1.7); } 12%, 100% { filter: brightness(1); } }
+.cell.on { background: color-mix(in srgb, var(--c) 82%, #0d0d11); box-shadow: 0 0 4px color-mix(in srgb, var(--c) 25%, transparent); }
+/* Per-lane playhead (set in main.js): every lane advances through its OWN steps
+   against one shared clock, so a 1/8 hi-hat lane ticks twice as fast as a 1/4
+   kick lane. The current step shows the head; a lit step under it fires as it
+   would actually sound. */
+.cell:not(.on).is-step { background: color-mix(in srgb, var(--cyan) 13%, var(--surface-elevated)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--cyan) 55%, transparent); }
+.cell.on.is-step { filter: brightness(1.9); box-shadow: 0 0 10px color-mix(in srgb, var(--c) 60%, transparent); }
 .ms-subrow { display: flex; align-items: center; gap: 6px; }
 .ms-add { margin-left: auto; font-family: var(--font-mono); font-size: .8rem; color: var(--cyan); }
 
@@ -706,14 +760,11 @@ main { display: block; }
 .vt-wave { width: 100%; height: 100%; }
 .vt-wave .band { fill: rgba(0,229,255,.08); }
 .vt-wave .zero { stroke: var(--wire-active, #6A6A72); stroke-width: 1; }
-.vt-wave .vt-trace-g { animation: vtScroll 2.6s linear infinite; }
-.vt-wave .vt-trace-g path { stroke: var(--cyan); stroke-width: 2.2; transition: stroke .3s; }
-@keyframes vtScroll { to { transform: translateX(-80px); } }
+.vt-wave .vt-line { stroke: var(--cyan); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: stroke .3s; }
 /* The pitch line rides up/down as the "voice" wanders, then settles to centre. */
-.vt-pitch { transition: transform .3s ease-out; }
-.vt-trace.is-sharp .vt-trace-g path { stroke: var(--amber); }
-.vt-trace.is-flat .vt-trace-g path { stroke: var(--magenta); }
-.vt-trace.is-in .vt-trace-g path { stroke: var(--cyan); }
+.vt-trace.is-sharp .vt-line { stroke: var(--amber); }
+.vt-trace.is-flat .vt-line { stroke: var(--magenta); }
+.vt-trace.is-in .vt-line { stroke: var(--cyan); }
 .vt-hold { height: 8px; border-radius: 4px; background: var(--wire); margin-top: 12px; overflow: hidden; }
 .vt-hold i { display: block; height: 100%; width: 0; background: var(--cyan); border-radius: 4px; }
 
@@ -777,6 +828,7 @@ main { display: block; }
 .sargam { display: flex; gap: 8px; align-items: flex-end; justify-content: center; }
 .sargam span { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-tertiary); animation: saLight 4s ease-in-out infinite; }
 .sargam span b { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1; }
+.sargam span em { font-family: var(--font-bangla); font-style: normal; font-size: 1.02rem; font-weight: 500; line-height: 1; opacity: .82; }
 .sargam span i { font-style: normal; font-family: var(--font-mono); font-size: .6rem; }
 .sargam span:nth-child(1){animation-delay:0s}.sargam span:nth-child(2){animation-delay:.5s}.sargam span:nth-child(3){animation-delay:1s}.sargam span:nth-child(4){animation-delay:1.5s}.sargam span:nth-child(5){animation-delay:2s}.sargam span:nth-child(6){animation-delay:2.5s}.sargam span:nth-child(7){animation-delay:3s}.sargam span:nth-child(8){animation-delay:3.5s}
 @keyframes saLight {
@@ -869,7 +921,11 @@ main { display: block; }
   .views__grid { grid-template-columns: 1fr; max-width: 380px; }
   .fx-tables { grid-template-columns: 1fr; }
   .ms-card { padding: 16px; min-height: 300px; }
-  .mslider__arrow { width: 34px; height: 34px; }
+  /* Drop the arrows on touch screens — swipe the card instead (see main.js).
+     The viewport then spans the full width for a roomier visualization. */
+  .mslider { grid-template-columns: 1fr; }
+  .mslider__arrow { display: none; }
+  .mslider__viewport { touch-action: pan-y; }
   .ms-bpm__num { font-size: 2.8rem; }
   .ms-tala { grid-template-columns: repeat(2, 1fr); }
   .ms-compas { gap: 2px; }
@@ -878,7 +934,11 @@ main { display: block; }
 @media (max-width: 560px) {
   .nav__cta { display: none; }
   .hero__stats { justify-content: center; }
-  .phone { width: 260px; height: 540px; }
+  .phone { width: 260px; height: 540px; border-radius: 42px; }
+  .phone__screen { border-radius: 36px; }
+  /* Full-width, stacked CTAs — even widths and bigger tap targets. */
+  .hero__actions { width: 100%; max-width: 340px; flex-direction: column; gap: 12px; margin: 28px 0 38px; }
+  .hero__actions .btn { width: 100%; justify-content: center; padding: 14px 22px; }
 }
 
 /* ---------- Reduced motion ---------- */
