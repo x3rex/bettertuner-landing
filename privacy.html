@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <title>Privacy Policy — BetterTuner</title>
+  <meta name="description" content="BetterTuner privacy policy. All audio is processed on-device. No data is collected, stored remotely, or shared." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://bettertuner.com/privacy.html" />
+  <link rel="stylesheet" href="assets/fonts.css" />
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #e8ecf1;
+      --text-dim: #9aa3ad;
+      --cyan: #22d3ee;
+      --line: rgba(255, 255, 255, 0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(32px, 8vw, 80px) 24px 64px;
+    }
+    h1, h2 {
+      font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 8px; }
+    h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+    .meta { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 40px; }
+    p, li { color: var(--text-dim); }
+    p { margin-bottom: 16px; }
+    ul { margin: 0 0 16px 22px; }
+    li { margin-bottom: 8px; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .brand img { width: 28px; height: 28px; }
+    .callout {
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--cyan);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 24px 0 32px;
+    }
+    .callout p { margin: 0; }
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 56px;
+      padding-top: 24px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="brand" href="index.html" aria-label="BetterTuner home">
+      <img src="assets/logo.svg" alt="" width="28" height="28" />
+      BetterTuner
+    </a>
+
+    <h1>Privacy Policy</h1>
+    <p class="meta">Effective date: June 12, 2026</p>
+
+    <div class="callout">
+      <p><strong>The short version:</strong> BetterTuner does not collect, store, transmit, or share any personal data. All audio is processed on your device in real time and is never recorded or saved.</p>
+    </div>
+
+    <h2>Microphone access</h2>
+    <p>BetterTuner requests the <strong>microphone permission</strong> (<code>RECORD_AUDIO</code>) for one purpose: detecting the pitch of your instrument or voice so the tuner, visualizers, and training exercises can work.</p>
+    <ul>
+      <li>Audio is analyzed <strong>on-device, in memory, in real time</strong>.</li>
+      <li>No audio is ever <strong>recorded, saved to storage, or transmitted</strong> anywhere.</li>
+      <li>Audio processing stops when you leave the app or revoke the permission.</li>
+    </ul>
+
+    <h2>Data collection</h2>
+    <p>BetterTuner collects <strong>no data</strong>. The app has no internet permission, which means it is technically incapable of sending anything off your device. There are:</p>
+    <ul>
+      <li>No analytics or telemetry</li>
+      <li>No advertising or ad identifiers</li>
+      <li>No accounts, sign-ins, or profiles</li>
+      <li>No crash reporting services</li>
+      <li>No third-party SDKs that collect data</li>
+    </ul>
+
+    <h2>Local settings</h2>
+    <p>Your preferences (selected instrument and tuning, reference pitch, metronome patterns, training statistics, and similar settings) are stored <strong>only on your device</strong> in the app's private storage. They are not backed up to the cloud by the app (<code>allowBackup</code> is disabled) and are deleted when you uninstall the app.</p>
+
+    <h2>Children</h2>
+    <p>BetterTuner is suitable for all ages. Because the app collects no data from anyone, it collects no data from children.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If a future version of BetterTuner ever changes how it handles data, this page will be updated before that version is released, and the effective date above will change.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy or the app? Email <a href="mailto:ayanabrand@gmail.com">ayanabrand@gmail.com</a>.</p>
+
+    <footer>
+      © <span>2026</span> BetterTuner ·
+      <a href="index.html">Home</a>
+    </footer>
+  </main>
+</body>
+</html>
