@@ -49,7 +49,7 @@
       <a href="#train">Train</a>
       <a href="#classical">Indian Classical</a>
     </nav>
-    <a href="#download" class="btn btn--ghost nav__cta">Get the app</a>
+    <a href="#download" class="btn btn--ghost nav__cta">Join the waitlist</a>
     <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu" data-nav-toggle>
       <span></span><span></span><span></span>
     </button>
@@ -60,7 +60,7 @@
       <a href="#chords">Chords</a>
       <a href="#train">Train</a>
       <a href="#classical">Indian Classical</a>
-      <a href="#download" class="btn btn--primary nav__menu-cta">Get the app</a>
+      <a href="#download" class="btn btn--primary nav__menu-cta">Join the waitlist</a>
     </div>
   </header>
 
@@ -80,8 +80,8 @@
         </p>
         <div class="hero__actions">
           <a href="#download" class="btn btn--primary">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 20.5v-17c0-.6.7-1 1.2-.7l14 8.5c.5.3.5 1.1 0 1.4l-14 8.5c-.5.3-1.2 0-1.2-.7Z"/></svg>
-            Get BetterTuner
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M18 8.4a6 6 0 0 0-12 0c0 6-2.4 7.2-2.4 7.2h16.8S18 14.4 18 8.4M13.7 19.2a2 2 0 0 1-3.4 0"/></svg>
+            Get notified at launch
           </a>
           <a href="#features" class="btn btn--ghost">Explore features</a>
         </div>
@@ -133,53 +133,50 @@
                 <span class="ladder__row"><i>e</i><b style="--w:63%"></b></span>
               </div>
             </div>
-            <!-- Bottom nav -->
+            <!-- Bottom nav — icons match the app's real tab bar -->
             <div class="app-nav">
               <!-- Tune (tuning fork) — active -->
               <span class="app-nav__item app-nav__item--active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8.5,3.5 L8.5,12 Q8.5,15.5 12,15.5 Q15.5,15.5 15.5,12 L15.5,3.5 M12,15.5 L12,19"/>
-                  <circle cx="12" cy="21" r="1.4" fill="currentColor" stroke="none"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.25 3V10C8.25 12.07 9.93 13.75 12 13.75C14.07 13.75 15.75 12.07 15.75 10V3"/>
+                  <path d="M12 13.75V21"/>
                 </svg>
               </span>
               <!-- Analyze (waveform) -->
               <span class="app-nav__item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3,13 L6,13 L8,8 L11,16 L13,5 L15,18 L17,11 L21,11"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 14V9.5C3 8.67 3.67 8 4.5 8C5.33 8 6 8.67 6 9.5V16.5C6 17.33 6.67 18 7.5 18C8.33 18 9 17.33 9 16.5V4.5C9 3.67 9.67 3 10.5 3C11.33 3 12 3.67 12 4.5V19.5C12 20.33 12.67 21 13.5 21C14.33 21 15 20.33 15 19.5V8.5C15 7.67 15.67 7 16.5 7C17.33 7 18 7.67 18 8.5V15.5C18 16.33 18.67 17 19.5 17C20.33 17 21 16.33 21 15.5V12"/>
                 </svg>
               </span>
-              <!-- Tempo (metronome) -->
+              <!-- Tempo (clock + play badge) -->
               <span class="app-nav__item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8,21 L16,21 L14,4 L10,4 Z"/>
-                  <path d="M12,18 L13.5,7"/>
-                  <circle cx="13.5" cy="7" r="1.4" fill="currentColor" stroke="none"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 8V12L13.5 13.5"/>
+                  <path d="M19.55 16.45C21.18 17.34 22 17.78 22 18.5C22 19.22 21.18 19.66 19.55 20.55L18.43 21.15C17.17 21.83 16.55 22.17 16.24 21.92C15.5 21.32 16.66 19.76 16.94 19.2C17.23 18.64 17.22 18.35 16.94 17.8C16.66 17.24 15.5 15.68 16.24 15.08C16.55 14.83 17.17 15.17 18.43 15.85L19.55 16.45Z"/>
+                  <path d="M13.03 21.95C12.69 21.98 12.35 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12C22 12.68 21.93 13.35 21.8 14"/>
                 </svg>
               </span>
-              <!-- Chords (chord chart) -->
+              <!-- Chords (piano) -->
               <span class="app-nav__item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M6,4 L6,20 M10,4 L10,20 M14,4 L14,20 M18,4 L18,20"/>
-                  <path d="M5,8 L19,8 M5,13 L19,13 M5,18 L19,18"/>
-                  <circle cx="10" cy="10.5" r="1.6" fill="currentColor" stroke="none"/>
-                  <circle cx="14" cy="15.5" r="1.6" fill="currentColor" stroke="none"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3.5" y="4.5" width="17" height="15" rx="2"/>
+                  <path d="M9.17 12.5V19.5 M14.83 12.5V19.5"/>
+                  <path d="M9.17 4.5V12 M14.83 4.5V12" stroke-width="2.6"/>
                 </svg>
               </span>
-              <!-- Train (headphones) -->
+              <!-- Train (sound levels + sparkle) -->
               <span class="app-nav__item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4,15 A8,8 0 0,1 20,15"/>
-                  <path d="M4,15 L4,18 A2,2 0 0,0 6,20 L7,20 A1,1 0 0,0 8,19 L8,16 A1,1 0 0,0 7,15 L4,15 Z"/>
-                  <path d="M20,15 L20,18 A2,2 0 0,1 18,20 L17,20 A1,1 0 0,1 16,19 L16,16 A1,1 0 0,1 17,15 L20,15 Z"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11.5 6C7.02 6 4.78 6 3.39 7.17C2 8.34 2 10.23 2 14C2 17.77 2 19.66 3.39 20.83C4.78 22 7.02 22 11.5 22C15.98 22 18.22 22 19.61 20.83C21 19.66 21 17.77 21 14C21 12.83 21 11.84 20.96 11"/>
+                  <path d="M18.5 2L18.76 2.7C19.1 3.61 19.27 4.07 19.6 4.4C19.93 4.73 20.39 4.9 21.3 5.24L22 5.5L21.3 5.76C20.39 6.1 19.93 6.27 19.6 6.6C19.27 6.93 19.1 7.39 18.76 8.3L18.5 9L18.24 8.3C17.9 7.39 17.73 6.93 17.4 6.6C17.07 6.27 16.61 6.1 15.7 5.76L15 5.5L15.7 5.24C16.61 4.9 17.07 4.73 17.4 4.4C17.73 4.07 17.9 3.61 18.24 2.7L18.5 2Z"/>
+                  <path d="M12 10V18 M9 12V16 M6 13V15 M15 12V16 M18 13V15"/>
                 </svg>
               </span>
-              <!-- Settings (sliders) -->
+              <!-- Settings (cog) -->
               <span class="app-nav__item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-                  <path d="M4,6.5 L20,6.5 M4,12.5 L20,12.5 M4,18.5 L20,18.5"/>
-                  <circle cx="15" cy="6.5" r="2" fill="currentColor" stroke="none"/>
-                  <circle cx="8" cy="12.5" r="2" fill="currentColor" stroke="none"/>
-                  <circle cx="17" cy="18.5" r="2" fill="currentColor" stroke="none"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3.5"/>
+                  <path d="M21.01 14.1C21.53 13.96 21.79 13.89 21.9 13.75C22 13.62 22 13.4 22 12.97V11.03C22 10.6 22 10.38 21.9 10.25C21.79 10.11 21.53 10.04 21.01 9.9C19.06 9.38 17.84 7.34 18.34 5.4C18.48 4.87 18.55 4.6 18.48 4.45C18.42 4.29 18.23 4.18 17.85 3.97L16.13 2.99C15.75 2.78 15.57 2.67 15.4 2.69C15.23 2.71 15.04 2.9 14.67 3.28C13.21 4.73 10.79 4.73 9.33 3.28C8.96 2.9 8.77 2.71 8.6 2.69C8.43 2.67 8.25 2.78 7.88 2.99L6.15 3.97C5.77 4.18 5.58 4.29 5.52 4.45C5.45 4.6 5.52 4.87 5.66 5.4C6.16 7.34 4.94 9.38 2.99 9.9C2.47 10.04 2.21 10.11 2.1 10.25C2 10.38 2 10.6 2 11.03V12.97C2 13.4 2 13.62 2.1 13.75C2.21 13.89 2.47 13.96 2.99 14.1C4.94 14.62 6.16 16.66 5.66 18.6C5.52 19.13 5.45 19.4 5.52 19.55C5.58 19.71 5.77 19.82 6.15 20.03L7.87 21.01C8.25 21.22 8.43 21.33 8.6 21.31C8.77 21.29 8.96 21.1 9.33 20.72C10.79 19.26 13.21 19.26 14.67 20.72C15.05 21.1 15.23 21.29 15.4 21.31C15.57 21.33 15.75 21.22 16.13 21.01L17.85 20.03C18.23 19.82 18.42 19.71 18.49 19.55C18.55 19.4 18.48 19.13 18.34 18.6C17.84 16.66 19.06 14.62 21.01 14.1Z"/>
                 </svg>
               </span>
             </div>
@@ -196,6 +193,17 @@
       <div class="trust__item"><span>On-device</span> pitch detection, zero lag</div>
       <span class="trust__sep"></span>
       <div class="trust__item"><span>Six tools</span> in one practice studio</div>
+    </section>
+
+    <!-- ============ INSTRUMENT MARQUEE ============ -->
+    <section class="marquee-section reveal">
+      <p class="marquee-label">Tunings for the instruments you actually play</p>
+      <div class="marquee">
+        <div class="marquee__track">
+          <span>Guitar</span><span>Bass</span><span>Ukulele</span><span>Violin</span><span>Viola</span><span>Cello</span><span>Mandolin</span><span>Banjo</span><span>Sitar</span><span>Sarod</span><span>Tanpura</span><span>Veena</span><span>Erhu</span><span>Pipa</span><span>Guqin</span><span>Oud</span><span>Saz</span><span>Bouzouki</span><span>Dotara</span><span>Voice</span>
+          <span aria-hidden="true">Guitar</span><span aria-hidden="true">Bass</span><span aria-hidden="true">Ukulele</span><span aria-hidden="true">Violin</span><span aria-hidden="true">Viola</span><span aria-hidden="true">Cello</span><span aria-hidden="true">Mandolin</span><span aria-hidden="true">Banjo</span><span aria-hidden="true">Sitar</span><span aria-hidden="true">Sarod</span><span aria-hidden="true">Tanpura</span><span aria-hidden="true">Veena</span><span aria-hidden="true">Erhu</span><span aria-hidden="true">Pipa</span><span aria-hidden="true">Guqin</span><span aria-hidden="true">Oud</span><span aria-hidden="true">Saz</span><span aria-hidden="true">Bouzouki</span><span aria-hidden="true">Dotara</span><span aria-hidden="true">Voice</span>
+        </div>
+      </div>
     </section>
 
     <!-- ============ FEATURES GRID ============ -->
@@ -231,7 +239,7 @@
             </div>
           </div>
           <h3>Two tuner views</h3>
-          <p>A clean per-string ladder, or a photo-real headstock you tune peg by peg. Auto-advance walks you across the strings hands-free.</p>
+          <p>A clean per-string ladder, or a true-to-instrument headstock you tune peg by peg. Auto-advance walks you across the strings hands-free.</p>
         </article>
 
         <!-- Live visualizers — oscilloscope -->
@@ -331,7 +339,7 @@
       <div class="section__head reveal">
         <span class="eyebrow" style="--accent:var(--cyan)"><span class="eyebrow__dot"></span> The tuner &amp; visualizers</span>
         <h2 class="section__title">See your pitch six different ways</h2>
-        <p class="section__sub">A photo-real headstock, a string ladder, and four real-time analyzers. Every view BetterTuner offers, lit up exactly as it looks in the app.</p>
+        <p class="section__sub">A true-to-instrument headstock, a string ladder, and four real-time analyzers. Every view BetterTuner offers, lit up exactly as it looks in the app.</p>
       </div>
 
       <div class="views__grid">
@@ -346,18 +354,134 @@
               </div>
             </div>
             <div class="viz-headstock">
-              <img src="assets/guitar.webp" alt="Photo-real guitar headstock tuner" loading="lazy" width="1696" height="2520" />
-              <span class="hpeg" style="left:14%"><i>E2</i></span>
-              <span class="hpeg" style="left:28.4%"><i>A2</i></span>
-              <span class="hpeg" style="left:42.8%"><i>D3</i></span>
-              <span class="hpeg" style="left:57.2%"><i>G3</i></span>
-              <span class="hpeg" style="left:71.6%"><i>B3</i></span>
-              <span class="hpeg hpeg--active" style="left:86%"><i>E4</i></span>
+              <!-- The app's actual vector headstock (headstock_guitar.xml), converted to SVG -->
+              <svg viewBox="0 0 690 1050" role="img" aria-label="Vector guitar headstock tuner">
+                <!-- Tuner wing buttons -->
+                <g fill="#A8ADB4" stroke="#15100D" stroke-width="1.2">
+                  <path d="M211 148l-33-6a17 24 0 1 0 0 16l33-2Z"/>
+                  <path d="M213 200l-33-6a17 24 0 1 0 0 16l33-2Z"/>
+                  <path d="M215 252l-33-6a17 24 0 1 0 0 16l33-2Z"/>
+                  <path d="M469 148l33-6a17 24 0 1 1 0 16l-33-2Z"/>
+                  <path d="M467 200l33-6a17 24 0 1 1 0 16l-33-2Z"/>
+                  <path d="M465 252l33-6a17 24 0 1 1 0 16l-33-2Z"/>
+                </g>
+                <g fill="#DDE0E4">
+                  <path d="M155.71 132.24a11 7 78 1 0 4.58 21.52 11 7 78 1 0-4.58-21.52z"/>
+                  <path d="M157.71 184.24a11 7 78 1 0 4.58 21.52 11 7 78 1 0-4.58-21.52z"/>
+                  <path d="M159.71 236.24a11 7 78 1 0 4.58 21.52 11 7 78 1 0-4.58-21.52z"/>
+                  <path d="M524.29 132.24a7 11 12 1 0-4.58 21.52 7 11 12 1 0 4.58-21.52z"/>
+                  <path d="M522.29 184.24a7 11 12 1 0-4.58 21.52 7 11 12 1 0 4.58-21.52z"/>
+                  <path d="M520.29 236.24a7 11 12 1 0-4.58 21.52 7 11 12 1 0 4.58-21.52z"/>
+                </g>
+                <!-- Headstock body + wood grain -->
+                <path fill="#3B2C26" stroke="#1C1410" stroke-width="2" d="M232 300c-10-28-24-46-27-68l-4-110c-1-25 10-36 33-36h72c15 0 25 9 34 23 9-14 19-23 34-23h72c23 0 34 11 33 36l-4 110c-3 22-17 40-27 68Z"/>
+                <path fill="none" stroke="#5C463B" stroke-opacity=".8" stroke-width=".98" d="M233.54 302.03c-9.85-27.58-23.64-45.3-26.6-66.98l-3.93-108.35c-0.99-24.62 9.85-35.46 32.5-35.46h70.92c14.78 0 24.63 8.87 33.5 22.66 8.86-13.8 18.7-22.66 33.48-22.66h70.92c22.66 0 33.5 10.84 32.5 35.46l-3.93 108.35c-2.96 21.67-16.75 39.4-26.6 66.98Z"/>
+                <g fill="none" stroke="#2C211C" stroke-opacity=".7" stroke-width="1">
+                  <path d="M340 116v170"/>
+                  <path d="M300 100c-4 60-6 120-4 184"/>
+                  <path d="M380 100c4 60 6 120 4 184"/>
+                  <path d="M256 96c-6 54-8 114-4 182"/>
+                  <path d="M424 96c6 54 8 114 4 182"/>
+                </g>
+                <!-- Truss rod cover -->
+                <path fill="#191210" stroke="#787C82" stroke-width="1.4" d="M320 154h40c4 0 6 3 5 7l-10 51c-3 12-27 12-30 0l-10-51c-1-4 1-7 5-7Z"/>
+                <path fill="#9AA0A7" d="M340 160.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                <path fill="#9AA0A7" d="M340 205.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                <!-- Strings from nut up to the posts -->
+                <g fill="none">
+                  <path stroke="#B08A6A" stroke-width="3.4" d="M255 292l-5-142"/>
+                  <path stroke="#B08A6A" stroke-width="2.8" d="M289 292l-25-90"/>
+                  <path stroke="#AB8C72" stroke-width="2.2" d="M323 292l-45-40"/>
+                  <path stroke="#BDBFC4" stroke-width="1.6" d="M357 292l45-40"/>
+                  <path stroke="#C6C8CD" stroke-width="1.3" d="M391 292l25-90"/>
+                  <path stroke="#CFD1D6" stroke-width="1.1" d="M425 292l5-142"/>
+                </g>
+                <!-- Tuning posts (body, slot, cap, button, highlight) -->
+                <g stroke="#14100D" stroke-width="1">
+                  <path fill="#8F959C" d="M242 131c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M244.5 130.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M250 122a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M250 114.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M248 116.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                  <path fill="#8F959C" d="M256 183c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M258.5 182.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M264 174a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M264 166.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M262 168.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                  <path fill="#8F959C" d="M270 233c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M272.5 232.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M278 224a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M278 216.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M276 218.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                  <path fill="#8F959C" d="M394 233c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M396.5 232.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M402 224a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M402 216.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M400 218.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                  <path fill="#8F959C" d="M408 183c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M410.5 182.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M416 174a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M416 166.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M414 168.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                  <path fill="#8F959C" d="M422 131c0-2.76 2.24-5 5-5h6c2.76 0 5 2.24 5 5v22c0 2.76-2.24 5-5 5h-6c-2.76 0-5-2.24-5-5z"/>
+                  <path fill="#C9CDD2" stroke="none" d="M424.5 130.5c0-1.38 1.12-2.5 2.5-2.5h0c1.38 0 2.5 1.12 2.5 2.5v23c0 1.38-1.12 2.5-2.5 2.5h0c-1.38 0-2.5-1.12-2.5-2.5z"/>
+                  <path fill="#D6D9DD" d="M430 122a8 4 0 1 0 0 8 8 4 0 1 0 0-8z"/>
+                  <path fill="#B7BCC3" d="M430 114.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13z"/>
+                  <path fill="#E8EAED" stroke="none" d="M428 116.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 1 0 0-4.8z"/>
+                </g>
+                <!-- String wraps around the posts -->
+                <g fill="none" stroke="#8A6A4E" stroke-width="1.6">
+                  <path d="M243.5 138q6.5 3 13 0"/><path d="M243.5 143q6.5 3 13 0"/><path d="M243.5 148q6.5 3 13 0"/>
+                  <path d="M257.5 190q6.5 3 13 0"/><path d="M257.5 195q6.5 3 13 0"/>
+                  <path d="M271.5 240q6.5 3 13 0"/><path d="M271.5 245q6.5 3 13 0"/>
+                </g>
+                <g fill="none" stroke="#B4B7BC" stroke-width="1.2">
+                  <path d="M395.5 240q6.5 3 13 0"/><path d="M395.5 245q6.5 3 13 0"/>
+                  <path d="M409.5 190q6.5 3 13 0"/><path d="M409.5 195q6.5 3 13 0"/>
+                  <path d="M423.5 138q6.5 3 13 0"/><path d="M423.5 143q6.5 3 13 0"/>
+                </g>
+                <!-- Fretboard -->
+                <path fill="#221813" d="M240 306h200l180 734H60z"/>
+                <path fill="none" stroke="#120D0A" stroke-width="2" d="M240 306h200l180 734H60z"/>
+                <g fill="none" stroke="#16100C" stroke-opacity=".5" stroke-width="1">
+                  <path d="M320 306l-70 734"/><path d="M360 306l-20 734"/><path d="M400 306l50 734"/>
+                </g>
+                <!-- Frets -->
+                <g fill="none">
+                  <path stroke="#5A5D63" stroke-width="4" d="M224.6 360h230.8"/><path stroke="#C7CAD0" stroke-width="2" d="M224.6 358.8h230.8"/>
+                  <path stroke="#5A5D63" stroke-width="4.5" d="M206.6 430h266.8"/><path stroke="#C7CAD0" stroke-width="2.2" d="M206.6 428.6h266.8"/>
+                  <path stroke="#5A5D63" stroke-width="5" d="M187.3 505h305.4"/><path stroke="#C7CAD0" stroke-width="2.4" d="M187.3 503.4h305.4"/>
+                  <path stroke="#5A5D63" stroke-width="5.5" d="M166.7 585h346.6"/><path stroke="#C7CAD0" stroke-width="2.6" d="M166.7 583.2h346.6"/>
+                  <path stroke="#5A5D63" stroke-width="6" d="M144.9 670h390.2"/><path stroke="#C7CAD0" stroke-width="2.8" d="M144.9 668h390.2"/>
+                  <path stroke="#5A5D63" stroke-width="6.5" d="M121.7 760h436.6"/><path stroke="#C7CAD0" stroke-width="3" d="M121.7 757.8h436.6"/>
+                  <path stroke="#5A5D63" stroke-width="7" d="M97.3 855h485.4"/><path stroke="#CCD0D6" stroke-width="3.2" d="M97.3 852.6h485.4"/>
+                  <path stroke="#5A5D63" stroke-width="7.5" d="M71.6 955h536.8"/><path stroke="#CCD0D6" stroke-width="3.4" d="M71.6 952.4h536.8"/>
+                </g>
+                <!-- Nut -->
+                <path fill="#ECE5D3" stroke="#B8AD93" stroke-width="1.5" d="M226 293c0-1.66 1.34-3 3-3h222c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3h-222c-1.66 0-3-1.34-3-3z"/>
+                <path fill="#F7F2E4" d="M226 293.5c0-1.1 0.9-2 2-2h224c1.1 0 2 0.9 2 2v0c0 1.1-0.9 2-2 2h-224c-1.1 0-2-0.9-2-2z"/>
+                <!-- Strings down the board (wound bass side, plain treble side) -->
+                <g fill="none">
+                  <path stroke="#6B4A32" stroke-width="6" d="M255 306L95 1040"/><path stroke="#C79C78" stroke-width="4.6" d="M255 306L95 1040"/><path stroke="#E8C9A8" stroke-width="1.4" d="M253.5 306L93 1040"/>
+                  <path stroke="#6B4A32" stroke-width="5" d="M289 306l-96 734"/><path stroke="#C79C78" stroke-width="3.8" d="M289 306l-96 734"/><path stroke="#E8C9A8" stroke-width="1.2" d="M287.8 306l-96.3 734"/>
+                  <path stroke="#6B4A32" stroke-width="4" d="M323 306l-32 734"/><path stroke="#CFA680" stroke-width="3" d="M323 306l-32 734"/><path stroke="#ECCFAE" stroke-width="1" d="M322 306l-32 734"/>
+                  <path stroke="#7A7D83" stroke-width="2.8" d="M357 306l32 734"/><path stroke="#DDE0E5" stroke-width="1.2" d="M356.2 306l32 734"/>
+                  <path stroke="#7A7D83" stroke-width="2.2" d="M391 306l96 734"/><path stroke="#E2E5EA" stroke-width="1" d="M390.4 306l96 734"/>
+                  <path stroke="#7A7D83" stroke-width="1.8" d="M425 306l160 734"/><path stroke="#E6E9EE" stroke-width="0.9" d="M424.5 306l160 734"/>
+                </g>
+              </svg>
+              <!-- Note buttons anchored to each string, as in the app -->
+              <span class="hpeg" style="left:17.4%"><i>E</i></span>
+              <span class="hpeg" style="left:30.2%"><i>A</i></span>
+              <span class="hpeg" style="left:42.9%"><i>D</i></span>
+              <span class="hpeg" style="left:55.6%"><i>G</i></span>
+              <span class="hpeg" style="left:68.4%"><i>B</i></span>
+              <span class="hpeg hpeg--active" style="left:81.1%"><i>E</i></span>
             </div>
           </div>
           <figcaption>
             <span class="viz-tile__name">Headstock</span>
-            <span class="viz-tile__desc">Tune peg by peg on a photo-real headstock</span>
+            <span class="viz-tile__desc">Tune peg by peg on a true-to-instrument headstock</span>
           </figcaption>
         </figure>
 
@@ -468,26 +592,44 @@
           </figcaption>
         </figure>
 
-        <!-- 4 · Strobe -->
+        <!-- 4 · Strobe — mirrors the app: two dot rings (inner at 2× speed),
+             spin direction = sharp/flat, cents arc from the 12-o'clock notch,
+             everything freezes when the note locks in -->
         <figure class="viz-tile reveal">
           <div class="viz-stage">
             <div class="viz-strobe">
-              <span class="sr sr1"></span>
-              <span class="sr sr2"></span>
-              <span class="sr sr3"></span>
-              <span class="sr sr4"></span>
+              <svg viewBox="0 0 240 240" aria-hidden="true">
+                <!-- Faint ±120° guide the cents arc reads against -->
+                <path class="stb-guide" d="M23 176 A112 112 0 1 1 217 176"/>
+                <!-- Cents arcs: counter-clockwise = flat, clockwise = sharp -->
+                <path class="stb-arc stb-arc--flat"  d="M120 8 A112 112 0 0 0 23 176" pathLength="1"/>
+                <path class="stb-arc stb-arc--sharp" d="M120 8 A112 112 0 0 1 217 176" pathLength="1"/>
+                <!-- Wire circles the dot bands ride on -->
+                <circle class="stb-wire" cx="120" cy="120" r="86"/>
+                <circle class="stb-wire" cx="120" cy="120" r="53"/>
+                <!-- 36-dot bands: pathLength+dasharray renders the dots -->
+                <g class="stb-outer">
+                  <circle class="stb-dots" cx="120" cy="120" r="86" pathLength="36"/>
+                </g>
+                <g class="stb-inner">
+                  <circle class="stb-dots stb-dots--inner" cx="120" cy="120" r="53" pathLength="36"/>
+                </g>
+                <!-- 12-o'clock reference notch -->
+                <line class="stb-notch" x1="120" y1="20" x2="120" y2="40"/>
+              </svg>
               <div class="viz-strobe__core">
-                <span class="viz-strobe__note">A</span>
-                <span class="lblwrap">
-                  <span class="lbl lbl--off">tuning…</span>
-                  <span class="lbl lbl--in">in tune</span>
+                <span class="viz-strobe__note">A4</span>
+                <span class="stb-status">
+                  <span class="stb-status__up">▲ TUNE UP</span>
+                  <span class="stb-status__down">▼ TUNE DOWN</span>
+                  <span class="stb-status__in">● IN TUNE</span>
                 </span>
               </div>
             </div>
           </div>
           <figcaption>
             <span class="viz-tile__name">Strobe</span>
-            <span class="viz-tile__desc">Rings freeze the instant you lock in</span>
+            <span class="viz-tile__desc">Spin shows sharp or flat — rings freeze when you lock in</span>
           </figcaption>
         </figure>
 
@@ -925,6 +1067,34 @@
           </div>
           <figcaption><b>Ear trainer</b><span>10 rounds · 4 choices · Sargam or Western</span></figcaption>
         </figure>
+
+        <!-- Chord trainer — strum-along: play the shape, the mic verifies it tone by tone -->
+        <figure class="trainer-card reveal">
+          <div class="ct" data-ct>
+            <div class="et-top">
+              <span class="et-round">CHORD <i data-ct-round>1</i> / 10</span>
+              <span class="et-chip">MATCHED <b data-ct-matched>0</b></span>
+              <span class="et-chip">TIME <b data-ct-time>0:04</b></span>
+            </div>
+            <div class="ct-hero">
+              <span class="ct-name" data-ct-name>C</span>
+              <span class="ct-qual" data-ct-qual>Major</span>
+              <svg class="fretboard ct-fb" viewBox="0 0 132 118" aria-hidden="true">
+                <g class="mk" data-ct-mk></g>
+                <g class="strings">
+                  <line x1="16" y1="30" x2="16" y2="110"/><line x1="36" y1="30" x2="36" y2="110"/><line x1="56" y1="30" x2="56" y2="110"/><line x1="76" y1="30" x2="76" y2="110"/><line x1="96" y1="30" x2="96" y2="110"/><line x1="116" y1="30" x2="116" y2="110"/>
+                </g>
+                <line class="nut" x1="16" y1="30" x2="116" y2="30"/>
+                <g class="frets"><line x1="16" y1="56" x2="116" y2="56"/><line x1="16" y1="83" x2="116" y2="83"/><line x1="16" y1="110" x2="116" y2="110"/></g>
+                <g class="dots" data-ct-dots></g>
+              </svg>
+              <div class="ct-tones" data-ct-tones></div>
+            </div>
+            <p class="ct-status" data-ct-status>Strum it — hold the chord and let it ring</p>
+            <div class="ct-bar"><i data-ct-bar></i></div>
+          </div>
+          <figcaption><b>Chord trainer</b><span>Strum along — the mic verifies it tone by tone</span></figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1005,23 +1175,27 @@
       </div>
     </section>
 
-    <!-- ============ INSTRUMENT MARQUEE ============ -->
-    <section class="marquee-section reveal">
-      <p class="marquee-label">Tunings for the instruments you actually play</p>
-      <div class="marquee">
-        <div class="marquee__track">
-          <span>Guitar</span><span>Bass</span><span>Ukulele</span><span>Violin</span><span>Viola</span><span>Cello</span><span>Mandolin</span><span>Banjo</span><span>Sitar</span><span>Sarod</span><span>Tanpura</span><span>Veena</span><span>Erhu</span><span>Pipa</span><span>Guqin</span><span>Oud</span><span>Saz</span><span>Bouzouki</span><span>Dotara</span><span>Voice</span>
-          <span aria-hidden="true">Guitar</span><span aria-hidden="true">Bass</span><span aria-hidden="true">Ukulele</span><span aria-hidden="true">Violin</span><span aria-hidden="true">Viola</span><span aria-hidden="true">Cello</span><span aria-hidden="true">Mandolin</span><span aria-hidden="true">Banjo</span><span aria-hidden="true">Sitar</span><span aria-hidden="true">Sarod</span><span aria-hidden="true">Tanpura</span><span aria-hidden="true">Veena</span><span aria-hidden="true">Erhu</span><span aria-hidden="true">Pipa</span><span aria-hidden="true">Guqin</span><span aria-hidden="true">Oud</span><span aria-hidden="true">Saz</span><span aria-hidden="true">Bouzouki</span><span aria-hidden="true">Dotara</span><span aria-hidden="true">Voice</span>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ DOWNLOAD CTA ============ -->
     <section class="cta" id="download">
       <div class="cta__inner reveal">
         <span class="nav__logo nav__logo--lg" data-logo></span>
         <h2>Bring BetterTuner to your practice</h2>
-        <p>Coming soon to the App Store and Google Play. Tune precisely, keep perfect time, and grow as a musician on every instrument.</p>
+        <p>Launching soon on Google Play. Join the waitlist for one email on launch day — or raise your hand as a <strong>founding tester</strong> and play it before everyone else.</p>
+
+        <!-- Waitlist: posts same-origin to a serverless function (see api/subscribe.js) -->
+        <form class="waitlist" action="/api/subscribe" method="POST" data-waitlist novalidate>
+          <div class="waitlist__row">
+            <input class="waitlist__input" type="email" name="email" required
+                   placeholder="you@example.com" autocomplete="email" aria-label="Email address" />
+            <button class="btn btn--primary waitlist__btn" type="submit">Get notified at launch</button>
+          </div>
+          <!-- Honeypot — hidden from humans, bots fill it and get quietly dropped -->
+          <input class="waitlist__hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="waitlist__note">One email when it ships. No spam, ever — unsubscribe with one click.</p>
+          <p class="waitlist__msg waitlist__msg--ok" hidden>You're on the list — see you at launch. Founding-tester invites for early access go out to this list first.</p>
+          <p class="waitlist__msg waitlist__msg--err" hidden></p>
+        </form>
+
         <div class="store-badges">
           <a class="store-badge" href="#" aria-label="Download on the App Store (coming soon)">
             <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path fill="currentColor" d="M17.05 12.536c-.024-2.65 2.165-3.92 2.264-3.984-1.234-1.804-3.155-2.052-3.838-2.08-1.634-.166-3.19.962-4.018.962-.83 0-2.105-.938-3.463-.912-1.782.026-3.426 1.036-4.344 2.632-1.852 3.21-.474 7.962 1.328 10.568.88 1.276 1.928 2.708 3.302 2.658 1.324-.052 1.824-.858 3.424-.858 1.6 0 2.05.858 3.452.832 1.426-.026 2.328-1.302 3.2-2.582 1.008-1.482 1.422-2.918 1.446-2.992-.032-.014-2.774-1.064-2.802-4.222zM14.38 4.74c.732-.888 1.226-2.122 1.09-3.35-1.054.043-2.33.702-3.086 1.588-.678.786-1.272 2.042-1.112 3.246 1.176.091 2.376-.597 3.108-1.484z"/></svg>

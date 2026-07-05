@@ -91,6 +91,57 @@
     counters.forEach((el) => cio.observe(el));
   }
 
+  /* ---- Waitlist form: AJAX submit with a plain-POST fallback ---- */
+  document.querySelectorAll("[data-waitlist]").forEach((form) => {
+    const row = form.querySelector(".waitlist__row");
+    const note = form.querySelector(".waitlist__note");
+    const ok = form.querySelector(".waitlist__msg--ok");
+    const err = form.querySelector(".waitlist__msg--err");
+    const btn = form.querySelector(".waitlist__btn");
+
+    const showSuccess = () => {
+      if (row) row.hidden = true;
+      if (note) note.hidden = true;
+      if (err) err.hidden = true;
+      if (ok) ok.hidden = false;
+    };
+
+    // Non-JS submits round-trip through /api/subscribe, which redirects
+    // back with ?joined=1 — surface the same success state on load.
+    if (new URLSearchParams(window.location.search).get("joined") === "1") {
+      showSuccess();
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      if (err) err.hidden = true;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        if (err) { err.textContent = "Enter a valid email address."; err.hidden = false; }
+        return;
+      }
+      const label = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Joining…"; }
+      try {
+        const r = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ email, company: form.company.value }),
+        });
+        if (!r.ok) {
+          let message = "Couldn't join the list right now — please try again.";
+          try { message = (await r.json()).error || message; } catch {}
+          throw new Error(message);
+        }
+        showSuccess();
+      } catch (ex) {
+        if (err) { err.textContent = ex.message || "Couldn't join the list right now — please try again."; err.hidden = false; }
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      }
+    });
+  });
+
   /* ---- Cycling cents readout on the hero gauge (sells the "lands in tune" idea) ---- */
   const centsEl = document.querySelector("[data-cents]");
   if (centsEl && !reduceMotion) {
@@ -407,6 +458,68 @@
       phase = (phase + 1) % 4;
     }
 
+    // Chord trainer — strum-along: show a shape, "hear" each chord tone land,
+    // fill the match bar, lock in. Open shapes drawn on a 6-string 3-fret grid.
+    const CHORDS = [
+      { name: "C",  qual: "Major", tones: ["C", "E", "G"],  mk: [[16, "✕"], [76, "○"], [116, "○"]], dots: [[36, 96.5, "3"], [56, 69.5, "2"], [96, 43, "1"]] },
+      { name: "G",  qual: "Major", tones: ["G", "B", "D"],  mk: [[56, "○"], [76, "○"], [96, "○"]],  dots: [[16, 96.5, "2"], [36, 69.5, "1"], [116, 96.5, "3"]] },
+      { name: "Am", qual: "Minor", tones: ["A", "C", "E"],  mk: [[16, "✕"], [36, "○"], [116, "○"]], dots: [[56, 69.5, "2"], [76, 69.5, "3"], [96, 43, "1"]] },
+      { name: "D",  qual: "Major", tones: ["D", "F♯", "A"], mk: [[16, "✕"], [36, "✕"], [56, "○"]],  dots: [[76, 69.5, "1"], [96, 96.5, "3"], [116, 69.5, "2"]] },
+    ];
+    const ctRoot = q("[data-ct]");
+    const cName = q("[data-ct-name]"), cQual = q("[data-ct-qual]"), cMk = q("[data-ct-mk]"),
+      cDots = q("[data-ct-dots]"), cTones = q("[data-ct-tones]"), cStatus = q("[data-ct-status]"),
+      cBar = q("[data-ct-bar]"), cRound = q("[data-ct-round]"), cMatched = q("[data-ct-matched]"),
+      cTime = q("[data-ct-time]");
+
+    const fmtSecs = (s) => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+    function ctLoad(chord) {
+      cName.textContent = chord.name;
+      cQual.textContent = chord.qual;
+      cMk.innerHTML = chord.mk.map(([x, m]) => `<text x="${x}" y="22">${m}</text>`).join("");
+      cDots.innerHTML = chord.dots.map(([x, y, f], i) =>
+        `<circle cx="${x}" cy="${y}" r="8" style="animation-delay:${i * 0.1}s"/><text class="fg" x="${x}" y="${y + 3.4}">${f}</text>`).join("");
+      cTones.innerHTML = chord.tones.map((t) => `<span>${t}</span>`).join("");
+    }
+    function ctTones(n) {
+      [...cTones.children].forEach((el, i) => el.classList.toggle("on", i < n));
+    }
+
+    let ctPhase = 0, ctIdx = 0, ctRoundN = 1, ctMatchedN = 0, ctSecs = 4, ctFirst = true;
+    function chordTick() {
+      ctSecs += 0.95;
+      cTime.textContent = fmtSecs(ctSecs);
+      if (ctPhase === 0) {
+        if (!ctFirst) {
+          ctRoundN++;
+          if (ctRoundN > 10) { ctRoundN = 1; ctMatchedN = 0; ctSecs = 4; }
+        }
+        ctFirst = false;
+        ctIdx = (ctRoundN - 1) % CHORDS.length;
+        ctRoot.classList.remove("is-matched");
+        ctLoad(CHORDS[ctIdx]);
+        ctTones(0);
+        cStatus.textContent = "Strum it — hold the chord and let it ring";
+        cBar.style.width = "6%";
+        cRound.textContent = ctRoundN;
+      } else if (ctPhase === 1) {
+        cStatus.textContent = "Listening…";
+        ctTones(1);
+        cBar.style.width = "38%";
+      } else if (ctPhase === 2) {
+        ctTones(2);
+        cBar.style.width = "72%";
+      } else {
+        ctTones(3);
+        ctRoot.classList.add("is-matched");
+        cStatus.textContent = "✓ Nice — that's " + CHORDS[ctIdx].name;
+        cBar.style.width = "100%";
+        ctMatchedN++;
+        cMatched.textContent = ctMatchedN;
+      }
+      ctPhase = (ctPhase + 1) % 4;
+    }
+
     if (reduceMotion) {
       // Rest on a settled "Ga" without any timers — draw one static, steady trace.
       vSwara.textContent = "Ga"; vHz.textContent = "329.6 Hz"; vStep.textContent = "Step 3 of 8";
@@ -416,6 +529,15 @@
       drawLine();
       banner("WHICH SWARA?", "neutral");
       choices[1].classList.add("sel");
+      // Chord trainer rests on a freshly matched C major.
+      if (ctRoot) {
+        ctLoad(CHORDS[0]);
+        ctTones(3);
+        ctRoot.classList.add("is-matched");
+        cStatus.textContent = "✓ Nice — that's C";
+        cBar.style.width = "100%";
+        cMatched.textContent = "3"; cRound.textContent = "3"; cTime.textContent = "0:41";
+      }
       return;
     }
 
@@ -425,6 +547,7 @@
     setInterval(frame, 55);
     setInterval(() => { vi = (vi + 1) % SWARAS.length; vocalStep(vi); }, 2400);
     setInterval(earTick, 1100);
+    if (ctRoot) { chordTick(); setInterval(chordTick, 950); }
   })();
 
   /* ---- Metronome playheads: a single beat clock steps through each pattern,

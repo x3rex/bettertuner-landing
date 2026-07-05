@@ -470,22 +470,32 @@ main { display: block; }
 .htune .lbl--in { color: var(--cyan); }
 
 .viz-headstock { position: relative; height: calc(100% - 42px); display: flex; }
-.viz-headstock img { height: 100%; width: auto; max-width: 100%; display: block; object-fit: contain; }
+.viz-headstock svg { height: 100%; width: auto; max-width: 100%; display: block; }
+/* Circular note buttons riding the strings, as in the app's headstock view. */
 .hpeg {
   position: absolute; top: 88%; transform: translate(-50%, -50%);
-  width: 12px; height: 12px; border-radius: 50%; background: var(--text-tertiary);
-  box-shadow: 0 0 0 3px rgba(0,0,0,.45); opacity: .55;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(22,17,13,.92); border: 1.5px solid rgba(236,229,211,.42);
+  box-shadow: 0 0 0 3px rgba(0,0,0,.35);
 }
 .hpeg i {
-  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
-  font-style: normal; font-family: var(--font-mono); font-size: .62rem;
-  color: var(--text-tertiary); letter-spacing: .04em;
+  font-style: normal; font-family: var(--font-mono); font-size: .64rem;
+  color: var(--text-secondary); letter-spacing: .02em;
 }
-/* The string currently being tuned (E): the peg and its label track the shared
-   tuning state — magenta / amber while off, cyan when it locks in — in sync with
-   the indicator up top, so the lit peg always points at the right string. */
-.hpeg--active { opacity: 1; animation: tuneFill 5s linear infinite; }
+/* The string currently being tuned (high E): the button's ring and letter track
+   the shared tuning state — magenta / amber while off, cyan when it locks in —
+   in sync with the indicator up top, so the lit button points at the right string. */
+.hpeg--active { animation: hpegRing 5s linear infinite; }
 .hpeg--active i { color: var(--cyan); font-weight: 700; animation: tuneColor 5s linear infinite; }
+@keyframes hpegRing {
+  0%,6%    { border-color: var(--cyan);    box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 14px var(--cyan); }
+  8%,24%   { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 10px var(--magenta); }
+  26%,42%  { border-color: var(--amber);   box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 10px var(--amber); }
+  44%,56%  { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 10px var(--magenta); }
+  58%,66%  { border-color: var(--amber);   box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 10px var(--amber); }
+  68%,100% { border-color: var(--cyan);    box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 0 14px var(--cyan); }
+}
 
 /* Ladder */
 .viz-ladder { width: 86%; display: flex; flex-direction: column; gap: 8px; }
@@ -511,17 +521,76 @@ main { display: block; }
 .viz-meter__cents .lbl--in { color: var(--cyan); }
 
 /* Strobe */
-.viz-strobe { position: relative; width: 240px; height: 240px; border-radius: 50%; color: var(--cyan); box-shadow: 0 0 70px rgba(0,229,255,.12), inset 0 0 50px rgba(0,0,0,.6); animation: tuneColor 5s linear infinite; }
-.viz-strobe .sr { position: absolute; border-radius: 50%; border: 2px solid currentColor; }
-.viz-strobe .sr1 { inset: 4px;  border-style: dashed; opacity: .3; animation: spin 9s linear infinite; }
-.viz-strobe .sr2 { inset: 26px; border-color: var(--violet); opacity: .45; animation: spin 6s linear infinite reverse; }
-.viz-strobe .sr3 { inset: 48px; border-style: dotted; animation: spin 4s linear infinite; }
-.viz-strobe .sr4 { inset: 70px; animation: spin 12s linear infinite reverse; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.viz-strobe__core { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; z-index: 2; }
-.viz-strobe__note { font-family: var(--font-display); font-size: 2.9rem; font-weight: 700; line-height: 1; color: currentColor; text-shadow: 0 0 24px currentColor; }
-.viz-strobe .lbl { font-family: var(--font-mono); font-size: .84rem; }
-.viz-strobe .lbl--in { color: var(--cyan); }
+/* Strobe — mirrors StrobeScreen.kt: two 36-dot bands (inner at 2× speed, same
+   direction), spin CW when sharp / CCW when flat, a cents arc sweeping from
+   the 12-o'clock notch, and everything freezing the moment the note locks.
+   Phase windows match the shared 5s tuneColor clock (magenta=flat, amber=sharp). */
+.viz-strobe { position: relative; width: 250px; height: 250px; color: var(--cyan); animation: tuneColor 5s linear infinite; }
+.viz-strobe svg { position: absolute; inset: 5px; overflow: visible; }
+.stb-guide { fill: none; stroke: var(--wire); stroke-width: 1.5; opacity: .7; }
+.stb-arc { fill: none; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.stb-arc--flat  { stroke: var(--magenta); animation: stbArcFlat 5s linear infinite; }
+.stb-arc--sharp { stroke: var(--amber);   animation: stbArcSharp 5s linear infinite; }
+.stb-wire { fill: none; stroke: var(--wire); stroke-width: 1; }
+/* pathLength=36 + dasharray "0 1" + round caps = 36 evenly spaced dots. */
+.stb-dots { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 0 1; }
+.stb-dots--inner { stroke-width: 5; opacity: .7; }
+.stb-outer, .stb-inner { transform-origin: 120px 120px; filter: drop-shadow(0 0 6px currentColor); }
+.stb-outer { animation: stbSpinOuter 5s linear infinite; }
+.stb-inner { animation: stbSpinInner 5s linear infinite; }
+.stb-notch { stroke: var(--text-secondary); stroke-width: 2; stroke-linecap: round; opacity: .75; }
+/* Flat phases spin counter-clockwise, sharp phases clockwise; the band is
+   10°-periodic so any resting angle reads as "stopped". Inner runs at 2×. */
+@keyframes stbSpinOuter {
+  0%, 8%   { transform: rotate(0deg); }
+  24%, 26% { transform: rotate(-30deg); }
+  42%, 44% { transform: rotate(6deg); }
+  56%, 58% { transform: rotate(-12deg); }
+  66%,100% { transform: rotate(0deg); }
+}
+@keyframes stbSpinInner {
+  0%, 8%   { transform: rotate(0deg); }
+  24%, 26% { transform: rotate(-60deg); }
+  42%, 44% { transform: rotate(12deg); }
+  56%, 58% { transform: rotate(-24deg); }
+  66%,100% { transform: rotate(0deg); }
+}
+@keyframes stbArcFlat {
+  0%, 7.9%   { opacity: 0; stroke-dashoffset: 1; }
+  8%         { opacity: 1; stroke-dashoffset: .95; }
+  16%        { opacity: 1; stroke-dashoffset: .55; }
+  23.9%      { opacity: 1; stroke-dashoffset: .75; }
+  24%, 43.9% { opacity: 0; stroke-dashoffset: 1; }
+  44%        { opacity: 1; stroke-dashoffset: .85; }
+  50%        { opacity: 1; stroke-dashoffset: .65; }
+  55.9%      { opacity: 1; stroke-dashoffset: .8; }
+  56%, 100%  { opacity: 0; stroke-dashoffset: 1; }
+}
+@keyframes stbArcSharp {
+  0%, 25.9%  { opacity: 0; stroke-dashoffset: 1; }
+  26%        { opacity: 1; stroke-dashoffset: .95; }
+  34%        { opacity: 1; stroke-dashoffset: .5; }
+  41.9%      { opacity: 1; stroke-dashoffset: .9; }
+  42%, 57.9% { opacity: 0; stroke-dashoffset: 1; }
+  58%        { opacity: 1; stroke-dashoffset: .85; }
+  65.9%      { opacity: 1; stroke-dashoffset: .97; }
+  66%, 100%  { opacity: 0; stroke-dashoffset: 1; }
+}
+.viz-strobe__core { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; z-index: 2; }
+.viz-strobe__note { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; line-height: 1; color: var(--text-primary); }
+/* Centre directive: ▲ TUNE UP (flat) / ▼ TUNE DOWN (sharp) / ● IN TUNE. */
+.stb-status { position: relative; height: 15px; width: 100%; }
+.stb-status span {
+  position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--font-mono); font-size: .64rem; letter-spacing: .28em; text-indent: .28em;
+  opacity: 0;
+}
+.stb-status__up   { color: var(--magenta); animation: stbLblUp 5s linear infinite; }
+.stb-status__down { color: var(--amber);   animation: stbLblDown 5s linear infinite; }
+.stb-status__in   { color: var(--cyan);    animation: stbLblIn 5s linear infinite; }
+@keyframes stbLblUp   { 0%,7.9% { opacity: 0; } 8%,23.9% { opacity: 1; } 24%,43.9% { opacity: 0; } 44%,55.9% { opacity: 1; } 56%,100% { opacity: 0; } }
+@keyframes stbLblDown { 0%,25.9% { opacity: 0; } 26%,41.9% { opacity: 1; } 42%,57.9% { opacity: 0; } 58%,65.9% { opacity: 1; } 66%,100% { opacity: 0; } }
+@keyframes stbLblIn   { 0%,7% { opacity: 1; } 8%,67.9% { opacity: 0; } 68%,100% { opacity: 1; } }
 
 /* Oscilloscope */
 .viz-scope { width: 88%; height: 210px; }
@@ -733,12 +802,32 @@ main { display: block; }
 .capo-note { margin-left: 12px; font-family: var(--font-mono); font-size: .78rem; color: var(--text-tertiary); letter-spacing: .04em; }
 
 /* ---------- The Vocal & Ear Trainer ---------- */
-.trainer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 940px; margin: 0 auto; }
+.trainer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+@media (max-width: 1100px) { .trainer-grid { grid-template-columns: 1fr; max-width: 480px; padding: 0; } }
 .trainer-card figcaption { text-align: center; margin-top: 16px; }
 .trainer-card figcaption b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; }
 .trainer-card figcaption span { color: var(--text-tertiary); font-size: .85rem; }
 
-.vt, .et { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: 16px; padding: 20px; min-height: 372px; display: flex; flex-direction: column; }
+.vt, .et, .ct { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: 16px; padding: 20px; min-height: 372px; display: flex; flex-direction: column; }
+
+/* Chord trainer (strum-along): chord name + shape, tone pills lighting up as
+   the mic hears each chord tone, then a match bar filling to the lock. */
+.ct-hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 10px; }
+.ct-name { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; line-height: 1.1; transition: color .3s; }
+.ct.is-matched .ct-name { color: var(--cyan); }
+.ct-qual { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em; color: var(--cyan); }
+.ct-fb { height: 108px; width: auto; margin-top: 10px; }
+.ct-tones { display: flex; gap: 8px; margin-top: 12px; }
+.ct-tones span {
+  font-family: var(--font-mono); font-size: .72rem; padding: 4px 13px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14); color: var(--text-tertiary);
+  transition: color .25s, border-color .25s, background .25s;
+}
+.ct-tones span.on { color: var(--cyan); border-color: rgba(0,229,255,.7); background: rgba(0,229,255,.1); }
+.ct-status { text-align: center; font-size: .8rem; color: var(--text-secondary); min-height: 19px; margin-top: 10px; transition: color .3s; }
+.ct.is-matched .ct-status { color: var(--cyan); }
+.ct-bar { height: 8px; border-radius: 4px; background: var(--wire); overflow: hidden; margin-top: 10px; }
+.ct-bar i { display: block; height: 100%; width: 0; background: var(--cyan); border-radius: 4px; transition: width .75s var(--ease); }
 
 /* Vocal trainer */
 .vt-top { display: flex; align-items: flex-start; }
@@ -874,6 +963,30 @@ main { display: block; }
 }
 .cta__inner h2 { font-size: clamp(2rem,4.5vw,3.2rem); margin: 20px 0 14px; }
 .cta__inner > p { color: var(--text-secondary); font-size: 1.08rem; max-width: 540px; margin: 0 auto 32px; }
+/* Waitlist form */
+.waitlist { max-width: 520px; margin: 0 auto 34px; }
+.waitlist__row { display: flex; gap: 10px; }
+.waitlist__row[hidden] { display: none; }
+.waitlist__input {
+  flex: 1; min-width: 0; padding: 12px 16px; border-radius: 12px;
+  border: 1px solid var(--hairline-2); background: var(--surface-2);
+  color: var(--text-primary); font-family: var(--font-sans); font-size: .96rem;
+  transition: border-color .2s;
+}
+.waitlist__input::placeholder { color: var(--text-tertiary); }
+.waitlist__input:focus { outline: none; border-color: var(--cyan); }
+.waitlist__btn { white-space: nowrap; }
+/* Honeypot: visually gone but still focusable-by-bots in the DOM. */
+.waitlist__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.waitlist__note { margin-top: 12px; font-size: .82rem; color: var(--text-tertiary); }
+.waitlist__msg { margin-top: 12px; font-size: .94rem; }
+.waitlist__msg--ok { color: var(--cyan); }
+.waitlist__msg--err { color: var(--magenta); }
+@media (max-width: 560px) {
+  .waitlist__row { flex-direction: column; }
+  .waitlist__btn { justify-content: center; }
+}
+
 .store-badges { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .store-badge {
   display: inline-flex; align-items: center; gap: 12px; padding: 12px 20px; border-radius: 12px;

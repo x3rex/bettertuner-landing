@@ -68,6 +68,33 @@ Drop the `website/` folder onto any static host:
 - **Netlify / Vercel / Cloudflare Pages** — set the publish/output directory to
   `website` and leave the build command empty.
 
+## Waitlist backend (Resend)
+
+The download-section form posts same-origin to `/api/subscribe` — a Vercel
+serverless function (`api/subscribe.js`) that adds the email to Resend's
+account-level contacts (`POST https://api.resend.com/contacts`). Same-origin
+means the strict CSP (`form-action 'self'`) needs no changes, and the API key
+never touches the client.
+
+One-time setup:
+
+1. Create a [Resend](https://resend.com) account (free tier: 1,000 contacts).
+2. Create an **API key** (API Keys → Create, "Full access" — contact writes
+   need it).
+3. In the Vercel project: Settings → Environment Variables, add
+   `RESEND_API_KEY`, then redeploy.
+4. Optional: also add `WAITLIST_NOTIFY_EMAIL` (e.g. a personal inbox) to get a
+   heads-up email from `waitlist@bettertuner.com` on every signup. Sending
+   works because the domain is verified in Resend; delivery failures never
+   break the signup itself.
+
+Until the env var is set, the endpoint returns a friendly "isn't configured
+yet" error. The form has a honeypot field (`company`); JS submits via `fetch`,
+and non-JS browsers fall back to a plain POST + redirect (`/?joined=1`).
+Note: serverless functions require the Vercel project to deploy the repo
+itself (not a static-only "output directory" upload) so the `api/` folder is
+picked up — the default GitHub → Vercel integration does this.
+
 ## Notes / before launch
 
 - **Store badges** in the download section currently link to `#` — swap in the
